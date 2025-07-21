@@ -50,10 +50,10 @@ const achievements = [
 
 export function ProjectsSection() {
   return (
-    <section className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-gray-50 to-white py-20">
-      <div className="max-w-7xl mx-auto text-center px-8 relative z-10">
+    <section className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-gray-50 to-white py-20 pr-8 pl-80">
+      <div className="max-w-5xl mx-auto text-left px-8 relative z-10">
         <motion.h2
-          className="text-5xl md:text-7xl font-black mb-8 text-gray-900"
+          className="text-4xl md:text-5xl font-black mb-6 text-gray-900"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
@@ -63,7 +63,7 @@ export function ProjectsSection() {
         </motion.h2>
 
         <motion.p
-          className="text-xl md:text-2xl mb-16 text-gray-700 max-w-4xl mx-auto"
+          className="text-lg md:text-xl mb-10 text-gray-700 max-w-3xl"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.3 }}
@@ -74,11 +74,11 @@ export function ProjectsSection() {
         </motion.p>
 
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
           {projects.map((project, index) => (
             <motion.div
               key={project.title}
-              className="bg-white/90 backdrop-blur-sm p-6 rounded-2xl border border-gray-100 shadow-lg hover:shadow-xl transition-all duration-500 text-left relative overflow-hidden group"
+              className="bg-white/90 backdrop-blur-sm p-4 rounded-xl border border-gray-100 shadow-lg hover:shadow-xl transition-all duration-500 text-left relative overflow-hidden group"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
@@ -95,7 +95,7 @@ export function ProjectsSection() {
                 transition={{ duration: 0.4 }}
               />
 
-              <h3 className="text-lg font-bold mb-3 text-gray-900">
+              <h3 className="text-base font-bold mb-2 text-gray-900">
                 {project.title}
               </h3>
 
@@ -113,14 +113,14 @@ export function ProjectsSection() {
           transition={{ duration: 1, delay: 0.5 }}
           viewport={{ once: true }}
         >
-          <h3 className="text-3xl font-bold text-cyan-600 mb-8">
+          <h3 className="text-2xl font-bold text-cyan-600 mb-6">
             Recent Achievements
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {achievements.map((achievement, index) => (
               <motion.div
                 key={achievement.title}
-                className="bg-gradient-to-br from-cyan-50 to-blue-50 p-8 rounded-2xl border border-cyan-100 shadow-lg hover:shadow-xl transition-all duration-500 text-left"
+                className="bg-gradient-to-br from-cyan-50 to-blue-50 p-6 rounded-xl border border-cyan-100 shadow-lg hover:shadow-xl transition-all duration-500 text-left"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.7 + index * 0.2 }}
@@ -131,10 +131,10 @@ export function ProjectsSection() {
                   boxShadow: "0 25px 60px rgba(6, 182, 212, 0.15)",
                 }}
               >
-                <h4 className="text-xl font-bold mb-4 text-gray-900">
+                <h4 className="text-lg font-bold mb-3 text-gray-900">
                   {achievement.title}
                 </h4>
-                <p className="text-gray-600 leading-relaxed">
+                <p className="text-gray-600 leading-relaxed text-sm">
                   {achievement.description}
                 </p>
               </motion.div>
@@ -145,7 +145,7 @@ export function ProjectsSection() {
 
       {/* Background Elements */}
       <motion.div
-        className="absolute bottom-20 left-20 w-64 h-64 bg-gradient-to-br from-purple-400/10 to-pink-400/10 rounded-full blur-3xl"
+        className="absolute bottom-20 right-20 w-48 h-48 bg-gradient-to-br from-purple-400/10 to-pink-400/10 rounded-full blur-3xl"
         animate={{
           scale: [1, 1.4, 1],
           x: [0, 50, 0],

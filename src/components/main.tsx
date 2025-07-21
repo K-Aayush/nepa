@@ -5,9 +5,7 @@ import { motion } from "framer-motion";
 
 import { AnimatedBackground } from "@/components/animated-background";
 import { CustomCursor } from "@/components/custom-cursor";
-import { Navbar } from "@/components/navbar";
 import { RobotGuide } from "@/components/robot-guide";
-import { ProgressIndicator } from "@/components/progress-indicator";
 import { Chatbot } from "@/components/chatbot";
 import { HomeSection } from "@/components/sections/home-section";
 import { AboutSection } from "@/components/sections/about-section";
@@ -15,11 +13,19 @@ import { ServicesSection } from "@/components/sections/services-section";
 import { ProjectsSection } from "@/components/sections/projects-section";
 import { ContactSection } from "@/components/sections/contact-section";
 import { Footer } from "@/components/footer";
+import { Navbar } from "./navbar";
 
-const sections = ["home", "about", "services", "projects", "contact"];
+const sections = [
+  "welcome",
+  "home",
+  "about",
+  "services",
+  "projects",
+  "contact",
+];
 
 export default function Main() {
-  const [currentSection, setCurrentSection] = useState("home");
+  const [currentSection, setCurrentSection] = useState("welcome");
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -35,8 +41,10 @@ export default function Main() {
     }
   };
 
-  const handleVisitWebsite = () => {
-    window.open("https://www.nepatronix.org", "_blank");
+  const handleRobotClick = () => {
+    const currentIndex = sections.indexOf(currentSection);
+    const nextIndex = (currentIndex + 1) % sections.length;
+    setCurrentSection(sections[nextIndex]);
   };
 
   // Intersection Observer for section detection
@@ -64,6 +72,10 @@ export default function Main() {
 
     return () => observer.disconnect();
   }, []);
+
+  const handleVisitWebsite = () => {
+    window.open("https://www.nepatronix.org", "_blank");
+  };
 
   // Loading Screen
   if (isLoading) {
@@ -116,7 +128,7 @@ export default function Main() {
   }
 
   return (
-    <div className="relative">
+    <div className="relative min-h-screen overflow-hidden">
       {/* Background Effects */}
       <AnimatedBackground />
 
@@ -127,40 +139,53 @@ export default function Main() {
       <Navbar onNavigate={navigateToSection} />
 
       {/* Robot Guide */}
-      <RobotGuide currentSection={currentSection} isVisible={true} />
-
-      {/* Progress Indicator */}
-      <ProgressIndicator
+      <RobotGuide
         currentSection={currentSection}
-        onNavigate={navigateToSection}
+        onRobotClick={handleRobotClick}
+        isVisible={true}
       />
 
       {/* Chatbot */}
       <Chatbot />
 
       {/* Main Content */}
-      <main className="relative z-10">
-        <div id="home">
-          <HomeSection onNavigate={navigateToSection} />
-        </div>
+      <main className="relative z-5">
+        {currentSection === "welcome" && (
+          <div className="min-h-screen flex items-center justify-center">
+            {/* Welcome content is handled by RobotGuide */}
+          </div>
+        )}
 
-        <div id="about">
-          <AboutSection />
-        </div>
+        {currentSection === "home" && (
+          <div className="min-h-screen">
+            <HomeSection onNavigate={handleRobotClick} />
+          </div>
+        )}
 
-        <div id="services">
-          <ServicesSection />
-        </div>
+        {currentSection === "about" && (
+          <div className="min-h-screen">
+            <AboutSection />
+          </div>
+        )}
 
-        <div id="projects">
-          <ProjectsSection />
-        </div>
+        {currentSection === "services" && (
+          <div className="min-h-screen">
+            <ServicesSection />
+          </div>
+        )}
 
-        <div id="contact">
-          <ContactSection onVisitWebsite={handleVisitWebsite} />
-        </div>
+        {currentSection === "projects" && (
+          <div className="min-h-screen">
+            <ProjectsSection />
+          </div>
+        )}
 
-        <Footer />
+        {currentSection === "contact" && (
+          <div className="min-h-screen">
+            <ContactSection onVisitWebsite={handleVisitWebsite} />
+            <Footer />
+          </div>
+        )}
       </main>
     </div>
   );

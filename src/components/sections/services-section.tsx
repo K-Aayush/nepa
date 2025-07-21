@@ -43,10 +43,10 @@ const services = [
 
 export function ServicesSection() {
   return (
-    <section className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-white to-gray-50">
-      <div className="max-w-7xl mx-auto text-center px-8 relative z-10">
+    <section className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-white to-gray-50 pl-8 pr-80">
+      <div className="max-w-5xl mx-auto text-left px-8 relative z-10">
         <motion.h2
-          className="text-5xl md:text-7xl font-black mb-8 text-gray-900"
+          className="text-4xl md:text-5xl font-black mb-6 text-gray-900"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
@@ -56,7 +56,7 @@ export function ServicesSection() {
         </motion.h2>
 
         <motion.p
-          className="text-xl md:text-2xl mb-16 text-gray-700 max-w-4xl mx-auto"
+          className="text-lg md:text-xl mb-10 text-gray-700 max-w-3xl"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.3 }}
@@ -66,11 +66,11 @@ export function ServicesSection() {
           industry, and innovation
         </motion.p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service, index) => (
             <motion.div
               key={service.title}
-              className="bg-white/90 backdrop-blur-sm p-8 rounded-3xl border border-gray-100 shadow-lg hover:shadow-2xl transition-all duration-500 relative overflow-hidden group"
+              className="bg-white/90 backdrop-blur-sm p-6 rounded-2xl border border-gray-100 shadow-lg hover:shadow-2xl transition-all duration-500 relative overflow-hidden group"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: index * 0.15 }}
@@ -83,20 +83,20 @@ export function ServicesSection() {
             >
               {/* Gradient overlay on hover */}
               <motion.div
-                className="absolute inset-0 bg-gradient-to-br from-blue-600/5 to-purple-600/5 rounded-3xl opacity-0"
+                className="absolute inset-0 bg-gradient-to-br from-blue-600/5 to-purple-600/5 rounded-2xl opacity-0"
                 whileHover={{ opacity: 1 }}
                 transition={{ duration: 0.4 }}
               />
 
               {/* Top border animation */}
               <motion.div
-                className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-t-3xl scale-x-0 origin-left"
+                className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-t-2xl scale-x-0 origin-left"
                 whileHover={{ scaleX: 1 }}
                 transition={{ duration: 0.5 }}
               />
 
               <motion.div
-                className="text-6xl mb-6 relative z-10"
+                className="text-4xl mb-4 relative z-10"
                 whileHover={{
                   scale: 1.2,
                   rotate: 8,
@@ -107,11 +107,11 @@ export function ServicesSection() {
                 {service.icon}
               </motion.div>
 
-              <h3 className="text-xl font-bold mb-4 text-gray-900 relative z-10">
+              <h3 className="text-lg font-bold mb-3 text-gray-900 relative z-10">
                 {service.title}
               </h3>
 
-              <p className="text-gray-600 leading-relaxed relative z-10">
+              <p className="text-gray-600 leading-relaxed relative z-10 text-sm">
                 {service.description}
               </p>
             </motion.div>
@@ -121,7 +121,7 @@ export function ServicesSection() {
 
       {/* Background decoration */}
       <motion.div
-        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-br from-cyan-400/5 to-blue-400/5 rounded-full blur-3xl"
+        className="absolute top-1/2 left-1/4 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-br from-cyan-400/5 to-blue-400/5 rounded-full blur-3xl"
         animate={{
           scale: [1, 1.2, 1],
           opacity: [0.3, 0.6, 0.3],
