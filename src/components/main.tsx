@@ -91,7 +91,7 @@ export default function Main() {
   // Loading Screen
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black flex items-center justify-center">
+      <div className="min-h-screen bg-white flex items-center justify-center">
         <motion.div
           className="text-center"
           initial={{ opacity: 0, scale: 0.5 }}
@@ -113,7 +113,7 @@ export default function Main() {
             🤖
           </motion.div>
           <motion.h1
-            className="text-4xl md:text-6xl font-black text-white mb-4"
+            className="text-4xl md:text-6xl font-black text-gray-800 mb-4"
             animate={{
               opacity: [0.5, 1, 0.5],
             }}
@@ -126,7 +126,7 @@ export default function Main() {
             NepaTronix
           </motion.h1>
           <motion.p
-            className="text-xl text-cyan-400"
+            className="text-xl text-cyan-600"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 1 }}
@@ -139,7 +139,7 @@ export default function Main() {
   }
 
   return (
-    <div className="relative min-h-screen overflow-hidden">
+    <div className="relative min-h-screen overflow-hidden bg-white">
       {/* Background Effects */}
       <AnimatedBackground />
 
@@ -188,11 +188,11 @@ export default function Main() {
         {/* Welcome Section */}
         <section
           id="welcome"
-          className="min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-gray-900 to-black relative overflow-hidden"
+          className="min-h-screen flex items-center justify-center bg-white relative overflow-hidden"
         >
-          <div className="text-center text-white z-10 relative">
+          <div className="text-center text-gray-800 z-10 relative">
             <motion.h1
-              className="text-6xl md:text-8xl font-black mb-6 bg-gradient-to-r from-white via-cyan-400 to-white bg-clip-text text-transparent"
+              className="text-6xl md:text-8xl font-black mb-6 bg-gradient-to-r from-gray-800 via-cyan-400 to-gray-800 bg-clip-text text-transparent"
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.2 }}
@@ -200,7 +200,7 @@ export default function Main() {
               NepaTronix
             </motion.h1>
             <motion.p
-              className="text-2xl md:text-3xl mb-8 text-cyan-400 font-bold"
+              className="text-2xl md:text-3xl mb-8 text-cyan-600 font-bold"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.3 }}
@@ -208,7 +208,7 @@ export default function Main() {
               Where Creativity Meets Innovation
             </motion.p>
             <motion.p
-              className="text-lg md:text-xl mb-12 text-gray-300 max-w-3xl mx-auto"
+              className="text-lg md:text-xl mb-12 text-gray-600 max-w-3xl mx-auto"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.5 }}
@@ -217,7 +217,7 @@ export default function Main() {
               the robot guide to explore our innovative solutions!
             </motion.p>
             <motion.div
-              className="text-cyan-400 text-lg font-semibold"
+              className="text-cyan-600 text-lg font-semibold"
               animate={{ opacity: [0.5, 1, 0.5] }}
               transition={{ duration: 2, repeat: Infinity }}
             >

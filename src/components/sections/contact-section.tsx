@@ -2,30 +2,36 @@
 
 import { motion } from "framer-motion";
 
-const contactOptions = [
+const partners = [
   {
-    icon: "🏫",
-    title: "School Partnerships",
-    description:
-      "Interested in bringing IoT and Robotics education to your school? Let's create a customized program for your students.",
+    name: "School A",
+    logo: "/partners/school-a.png",
+    description: "Empowering students with IoT and Robotics education.",
   },
   {
-    icon: "🏭",
-    title: "Industrial Solutions",
-    description:
-      "Need automation systems or IoT solutions for your business? We develop custom hardware and software solutions.",
+    name: "Industry B",
+    logo: "/partners/industry-b.png",
+    description: "Innovative automation solutions for industrial growth.",
   },
   {
-    icon: "🎓",
-    title: "Training & Workshops",
-    description:
-      "Want to learn Arduino, ESP32, or robotics? Join our hands-on workshops and certification programs.",
+    name: "Tech C",
+    logo: "/partners/tech-c.png",
+    description: "Collaborating on AI and ML research projects.",
   },
   {
-    icon: "💡",
-    title: "Project Collaboration",
-    description:
-      "Have an innovative IoT idea? Let's work together to bring your vision to life with cutting-edge technology.",
+    name: "Academy D",
+    logo: "/partners/academy-d.png",
+    description: "Leading workshops and training for future innovators.",
+  },
+  {
+    name: "Startup E",
+    logo: "/partners/startup-e.png",
+    description: "Driving new ideas in IoT and smart devices.",
+  },
+  {
+    name: "School F",
+    logo: "/partners/school-f.png",
+    description: "Expanding STEAM education across Nepal.",
   },
 ];
 
@@ -36,70 +42,66 @@ interface ContactSectionProps {
 export function ContactSection({ onVisitWebsite }: ContactSectionProps) {
   return (
     <section className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-white to-gray-50 px-8">
-      <div className="max-w-4xl mx-auto text-left px-8 relative z-10">
+      <div className="max-w-5xl mx-auto text-center px-8 relative z-10">
         <motion.h2
-          className="text-4xl md:text-5xl font-black mb-6 text-gray-900"
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
+          className="text-5xl md:text-6xl font-black mb-8 bg-gradient-to-r from-blue-700 via-cyan-500 to-purple-600 bg-clip-text text-transparent drop-shadow-lg"
+          initial={{ opacity: 0, scale: 0.8, y: -40 }}
+          whileInView={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: 1.2, ease: [0.4, 0, 0.2, 1] }}
           viewport={{ once: true }}
         >
-          Connect With NepaTronix
+          OUR PARTNERS
         </motion.h2>
 
         <motion.p
-          className="text-lg md:text-xl mb-10 text-gray-700 max-w-3xl"
+          className="text-lg md:text-xl mb-10 text-gray-700 max-w-3xl mx-auto leading-relaxed"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.3 }}
           viewport={{ once: true }}
         >
-          Ready to revolutionize your IoT and robotics journey? Let&apos;s
-          collaborate on your next innovative project!
+          We are proud to collaborate with leading schools, industries, and
+          organizations to drive innovation in IoT and robotics across Nepal.
         </motion.p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-          {contactOptions.map((option, index) => (
-            <motion.div
-              key={option.title}
-              className="bg-white/90 backdrop-blur-sm p-6 rounded-2xl border border-gray-100 shadow-lg hover:shadow-2xl transition-all duration-500 relative overflow-hidden"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: index * 0.2 }}
-              viewport={{ once: true }}
-              whileHover={{
-                y: -15,
-                scale: 1.02,
-                boxShadow: "0 25px 60px rgba(0, 0, 0, 0.1)",
-              }}
-            >
+        {/* Animated horizontal scrolling partners list */}
+        <motion.div
+          className="w-full overflow-x-auto py-4 mb-12"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.5 }}
+          viewport={{ once: true }}
+        >
+          <div className="flex gap-8 min-w-full animate-scroll-x">
+            {partners.map((partner, idx) => (
               <motion.div
-                className="absolute inset-0 bg-gradient-to-br from-blue-600/5 to-purple-600/5 opacity-0"
-                whileHover={{ opacity: 1 }}
-                transition={{ duration: 0.3 }}
-              />
-
-              <motion.div
-                className="text-4xl mb-4"
+                key={partner.name}
+                className="bg-white/90 backdrop-blur-lg px-8 py-6 rounded-2xl border border-blue-100 shadow-xl flex flex-col items-center min-w-[260px] max-w-[260px] mx-2"
+                initial={{ scale: 0.9, opacity: 0 }}
+                whileInView={{ scale: 1, opacity: 1 }}
                 whileHover={{
-                  scale: 1.2,
-                  rotate: 8,
+                  scale: 1.07,
+                  boxShadow: "0 25px 60px rgba(59, 130, 246, 0.18)",
+                  borderColor: "#06b6d4",
                 }}
-                transition={{ duration: 0.3 }}
+                transition={{ duration: 0.6, delay: idx * 0.1 }}
+                viewport={{ once: true }}
               >
-                {option.icon}
+                <img
+                  src={partner.logo}
+                  alt={partner.name}
+                  className="h-16 w-16 mb-4 rounded-full shadow-md object-contain bg-white"
+                />
+                <h3 className="text-lg font-bold mb-2 text-gray-900">
+                  {partner.name}
+                </h3>
+                <p className="text-gray-600 text-sm text-center">
+                  {partner.description}
+                </p>
               </motion.div>
-
-              <h3 className="text-xl font-bold mb-3 text-gray-900">
-                {option.title}
-              </h3>
-
-              <p className="text-gray-600 leading-relaxed text-base">
-                {option.description}
-              </p>
-            </motion.div>
-          ))}
-        </div>
+            ))}
+          </div>
+        </motion.div>
 
         {/* Get In Touch Section */}
         <motion.div
@@ -110,13 +112,12 @@ export function ContactSection({ onVisitWebsite }: ContactSectionProps) {
           viewport={{ once: true }}
         >
           <h3 className="text-2xl font-bold text-cyan-600 mb-4">
-            Get In Touch
+            Become a Partner
           </h3>
           <p className="text-lg mb-6 text-gray-700">
-            Visit us at{" "}
+            Interested in joining our partner network? Visit{" "}
             <strong className="text-cyan-600">www.nepatronix.org</strong> to
-            explore our full range of IoT and robotics solutions, browse our
-            latest projects, and discover educational resources.
+            connect and collaborate on future projects.
           </p>
 
           <motion.button
@@ -153,6 +154,19 @@ export function ContactSection({ onVisitWebsite }: ContactSectionProps) {
           ease: "linear",
         }}
       />
+
+      {/* Add scrolling animation keyframes */}
+      <style>
+        {`
+          @keyframes scroll-x {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+          }
+          .animate-scroll-x {
+            animation: scroll-x 30s linear infinite;
+          }
+        `}
+      </style>
     </section>
   );
 }

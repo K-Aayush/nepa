@@ -27,6 +27,18 @@ const features = [
 		description:
 			"Cutting-edge research in AI, ML, and robotics to solve real-world challenges",
 	},
+  {
+		icon: "🔬",
+		title: "Research & Innovation",
+		description:
+			"Cutting-edge research in AI, ML, and robotics to solve real-world challenges",
+	},
+  {
+		icon: "🔬",
+		title: "Research & Innovation",
+		description:
+			"Cutting-edge research in AI, ML, and robotics to solve real-world challenges",
+	},
 ];
 
 export function AboutSection() {
