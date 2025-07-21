@@ -18,11 +18,14 @@ import { ProgressIndicator } from "./progress-indicator";
 
 const sections = [
   "welcome",
-  "home",
-  "about",
-  "services",
-  "projects",
-  "contact",
+  "Home",
+  "COLLABORATION",
+  "SERVICES",
+  "PRODUCTS",
+  "TEAMS",
+  "BLOGS",
+  "GALLERY",
+  "CONTACT",
 ];
 
 export default function Main() {
@@ -144,7 +147,7 @@ export default function Main() {
       <CustomCursor />
 
       {/* Navigation */}
-      <Navbar onNavigate={navigateToSection} />
+      <Navbar onNavigate={navigateToSection} activeSection={""} />
 
       {/* Progress Indicator */}
       <ProgressIndicator

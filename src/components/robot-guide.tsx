@@ -93,10 +93,11 @@ export function RobotGuide({
 
   if (!isVisible || !currentData) return null;
 
-  const robotSize = isWelcome ? "w-32 h-40" : "w-20 h-28";
-  const headSize = isWelcome ? "w-20 h-16" : "w-12 h-10";
-  const eyeSize = isWelcome ? "w-2 h-2" : "w-1.5 h-1.5";
-  const eyeGap = isWelcome ? "gap-4" : "gap-2";
+  // Enhanced robot size and glow
+  const robotSize = isWelcome ? "w-36 h-44" : "w-24 h-32";
+  const headSize = isWelcome ? "w-24 h-18" : "w-14 h-12";
+  const eyeSize = isWelcome ? "w-3 h-3" : "w-2 h-2";
+  const eyeGap = isWelcome ? "gap-6" : "gap-3";
 
   return (
     <motion.div
@@ -166,27 +167,27 @@ export function RobotGuide({
             transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
           >
             <div
-              className={`bg-gray-900/95 backdrop-blur-xl rounded-2xl p-4 shadow-2xl border border-gray-700/50 text-white relative ${
+              className={`bg-gradient-to-br from-cyan-900 via-gray-900 to-gray-800 backdrop-blur-xl rounded-2xl p-5 shadow-2xl border border-cyan-400/30 text-white relative ${
                 isWelcome ? "text-center" : "text-left"
               }`}
             >
               <h3
                 className={`font-bold mb-2 ${
-                  isWelcome ? "text-xl md:text-2xl" : "text-base"
+                  isWelcome ? "text-2xl md:text-3xl drop-shadow-lg" : "text-base"
                 }`}
               >
                 {currentData.title}
               </h3>
               <p
-                className={`text-gray-300 leading-relaxed ${
-                  isWelcome ? "text-sm md:text-base" : "text-xs"
+                className={`text-cyan-200 leading-relaxed ${
+                  isWelcome ? "text-base md:text-lg" : "text-sm"
                 }`}
               >
                 {currentData.description}
               </p>
               {isWelcome && (
                 <motion.div
-                  className="mt-4 text-cyan-400 font-bold text-sm"
+                  className="mt-4 text-cyan-400 font-bold text-base"
                   animate={{ opacity: [0.5, 1, 0.5] }}
                   transition={{ duration: 2, repeat: Infinity }}
                 >
@@ -194,7 +195,7 @@ export function RobotGuide({
                 </motion.div>
               )}
               {!isWelcome && (
-                <div className="mt-2 text-xs text-gray-500">
+                <div className="mt-2 text-xs text-gray-400">
                   Hover to keep message visible
                 </div>
               )}
@@ -203,12 +204,12 @@ export function RobotGuide({
               <div
                 className={`absolute ${
                   currentData.messageDirection === "bottom"
-                    ? "top-0 left-1/2 transform -translate-x-1/2 -translate-y-full border-l-[12px] border-r-[12px] border-b-[8px] border-l-transparent border-r-transparent border-b-gray-900/95"
+                    ? "top-0 left-1/2 transform -translate-x-1/2 -translate-y-full border-l-[12px] border-r-[12px] border-b-[8px] border-l-transparent border-r-transparent border-b-cyan-900"
                     : currentData.messageDirection === "right"
-                    ? "right-full top-1/2 transform -translate-y-1/2 translate-x-1 border-t-[8px] border-b-[8px] border-r-[12px] border-t-transparent border-b-transparent border-r-gray-900/95"
+                    ? "right-full top-1/2 transform -translate-y-1/2 translate-x-1 border-t-[8px] border-b-[8px] border-r-[12px] border-t-transparent border-b-transparent border-r-cyan-900"
                     : currentData.messageDirection === "left"
-                    ? "left-full top-1/2 transform -translate-y-1/2 -translate-x-1 border-t-[8px] border-b-[8px] border-l-[12px] border-t-transparent border-b-transparent border-l-gray-900/95"
-                    : "bottom-0 left-1/2 transform -translate-x-1/2 translate-y-full border-l-[12px] border-r-[12px] border-t-[8px] border-l-transparent border-r-transparent border-t-gray-900/95"
+                    ? "left-full top-1/2 transform -translate-y-1/2 -translate-x-1 border-t-[8px] border-b-[8px] border-l-[12px] border-t-transparent border-b-transparent border-l-cyan-900"
+                    : "bottom-0 left-1/2 transform -translate-x-1/2 translate-y-full border-l-[12px] border-r-[12px] border-t-[8px] border-l-transparent border-r-transparent border-t-cyan-900"
                 }`}
               />
             </div>

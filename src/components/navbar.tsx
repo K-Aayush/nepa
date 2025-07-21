@@ -1,72 +1,66 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
+import { useState } from "react";
 
 interface NavbarProps {
   onNavigate: (section: string) => void;
+  activeSection: string;
 }
 
-export function Navbar({ onNavigate }: NavbarProps) {
+export function Navbar({ onNavigate, activeSection }: NavbarProps) {
   const { scrollY } = useScroll();
-  const backgroundColor = useTransform(
-    scrollY,
-    [0, 100],
-    ["rgba(255, 255, 255, 0.85)", "rgba(255, 255, 255, 0.95)"]
-  );
   const padding = useTransform(scrollY, [0, 100], ["25px 60px", "20px 60px"]);
 
   const navItems = [
-    { name: "Home", id: "home" },
-    { name: "About", id: "about" },
-    { name: "Services", id: "services" },
-    { name: "Projects", id: "projects" },
-    { name: "Contact", id: "contact" },
+    { name: "HOME", id: "home" },
+    { name: "COLLABORATION", id: "about" },
+    { name: "SERVICES", id: "services" },
+    { name: "PRODUCTS", id: "projects" },
+    { name: "TEAMS", id: "contact" },
+    { name: "BLOGS", id: "blogs" },
+    { name: "GALLERY", id: "gallery" },
+    { name: "CONTACT", id: "contact" },
   ];
+
+  // Set navbar background color to match landing page uniformly
+  const backgroundColor = "rgba(255, 255, 255, 0.95)";
 
   return (
     <motion.nav
-      className="fixed top-0 w-full flex justify-between items-center z-50 backdrop-blur-xl border-b border-black/[0.03]"
-      style={{ backgroundColor, padding }}
+      className="fixed top-0 w-full flex justify-center items-center z-10"
+      style={{ backgroundColor: "transparent", padding }}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 1.2, ease: [0.4, 0, 0.2, 1] }}
     >
-      <motion.div
-        className="text-2xl font-black text-slate-800 relative"
-        animate={{ y: [0, -5, 0] }}
-        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-      >
-        NepaTronix
-        <motion.div
-          className="absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-blue-600 to-purple-600"
-          initial={{ width: 0 }}
-          whileHover={{ width: "100%" }}
-          transition={{ duration: 0.4 }}
-        />
-      </motion.div>
-
-      <div className="hidden md:flex gap-11">
+      <div className="flex items-center bg-white rounded-full shadow-md px-4 py-1.5 gap-0">
+        {/* Logo in the left first corner with extra spacing and subtle border */}
+        <div className="flex items-center justify-center bg-white rounded-full shadow-sm mr-6 p-2 border border-gray-200">
+          <img
+            src="/logo.png"
+            alt="Logo"
+            className="h-8 w-35"
+          />
+        </div>
         {navItems.map((item) => (
-          <motion.button
+          <button
             key={item.id}
             onClick={() => onNavigate(item.id)}
-            className="relative text-slate-600 font-semibold px-6 py-3 rounded-full overflow-hidden"
-            whileHover={{ y: -3, color: "#4f46e5" }}
-            transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+            className={`relative flex items-center px-5 py-2 font-semibold transition-colors duration-200 rounded-full
+              ${
+                activeSection === item.id
+                  ? "bg-green-200 text-black"
+                  : "bg-transparent text-slate-700 hover:bg-slate-100"
+              }`}
           >
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-600/10 to-transparent"
-              initial={{ x: "-100%" }}
-              whileHover={{ x: "100%" }}
-              transition={{ duration: 0.8 }}
-            />
-            <motion.div
-              className="absolute bottom-2 left-1/2 w-0 h-0.5 bg-gradient-to-r from-blue-600 to-purple-600"
-              whileHover={{ width: "70%", x: "-50%" }}
-              transition={{ duration: 0.4 }}
-            />
-            {item.name}
-          </motion.button>
+            <span>{item.name}</span>
+            {activeSection === item.id && (
+              <span className="ml-2 flex items-center justify-center w-6 h-6 rounded-full bg-black text-green-200 font-bold text-sm">
+                4
+              </span>
+            )}
+          </button>
         ))}
       </div>
     </motion.nav>

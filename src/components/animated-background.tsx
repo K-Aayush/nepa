@@ -10,7 +10,7 @@ export function AnimatedBackground() {
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(135deg, #000000 0%, #1a1a1a 25%, #2d2d2d 50%, #1a1a1a 75%, #000000 100%)",
+            "linear-gradient(135deg, #EBE3E3FF 0%, #FAF7F7FF 25%, #2d2d2d 50%, #1a1a1a 75%, #000000 100%)",
           backgroundSize: "400% 400%",
         }}
         animate={{
