@@ -7,50 +7,51 @@ interface RobotGuideProps {
   currentSection: string;
   onRobotClick: () => void;
   isVisible: boolean;
+  speechEnabled?: boolean;
 }
 
 const sectionMessages = {
   welcome: {
-    title: "Welcome to NepaTronix! 🚀",
+    title: "🚀 Welcome to NepaTronix!",
     description:
-      "Where Creativity Meets Innovation in IoT and Robotics. I'm your guide through our amazing journey of technology and education. Click me to explore!",
+      "I'm your IoT guide! Let's explore where creativity meets innovation. Click me to start your journey!",
     position: { top: "50%", left: "50%", transform: "translate(-50%, -50%)" },
-    size: "large",
+    messageDirection: "bottom",
   },
   home: {
     title: "🏠 Our Amazing Home",
     description:
-      "Discover NepaTronix - Nepal's leading IoT and Robotics company with 67+ happy students, 15+ completed projects, and innovative solutions.",
-    position: { top: "30%", right: "10%", transform: "none" },
-    size: "medium",
+      "Discover NepaTronix - Nepal's leading IoT and Robotics company with 67+ happy students and 15+ completed projects.",
+    position: { top: "30%", left: "120px" },
+    messageDirection: "right",
   },
   about: {
     title: "🔬 Meet Our Team",
     description:
-      "Learn about our vision and expertise in IoT development, automation, STEAM education, and cutting-edge research in AI and robotics.",
-    position: { top: "25%", left: "10%", transform: "none" },
-    size: "medium",
+      "Learn about our vision and expertise in IoT development, automation, STEAM education, and cutting-edge research.",
+    position: { top: "25%", right: "120px" },
+    messageDirection: "left",
   },
   services: {
     title: "⚙️ Our Services",
     description:
-      "From school IoT programs to industrial automation, mobile app integration, and technical training - we've got comprehensive solutions!",
-    position: { bottom: "30%", right: "10%", transform: "none" },
-    size: "medium",
+      "From school IoT programs to industrial automation, mobile app integration, and technical training - we've got you covered!",
+    position: { top: "30%", left: "120px" },
+    messageDirection: "right",
   },
   projects: {
     title: "🚀 Innovation Showcase",
     description:
-      "Explore our fire detection systems, LoRa networks, ultrasonic radar, smart street lights, and award-winning automation projects.",
-    position: { bottom: "25%", left: "10%", transform: "none" },
-    size: "medium",
+      "Explore our fire detection systems, LoRa networks, ultrasonic radar, smart street lights, and award-winning projects.",
+    position: { top: "25%", right: "120px" },
+    messageDirection: "left",
   },
   contact: {
     title: "📞 Let's Connect",
     description:
       "Ready to collaborate? Whether it's school partnerships, industrial solutions, or training programs - let's build the future together!",
-    position: { top: "25%", left: "50%", transform: "translateX(-50%)" },
-    size: "medium",
+    position: { top: "30%", left: "120px" },
+    messageDirection: "right",
   },
 };
 
@@ -58,9 +59,11 @@ export function RobotGuide({
   currentSection,
   onRobotClick,
   isVisible,
+  speechEnabled = true,
 }: RobotGuideProps) {
   const [showMessage, setShowMessage] = useState(true);
   const [isHovered, setIsHovered] = useState(false);
+  const [isMoving, setIsMoving] = useState(false);
 
   const currentData =
     sectionMessages[currentSection as keyof typeof sectionMessages];
@@ -68,7 +71,7 @@ export function RobotGuide({
 
   // Auto-hide message after 5 seconds (except for welcome)
   useEffect(() => {
-    if (!isWelcome) {
+    if (!isWelcome && speechEnabled) {
       const timer = setTimeout(() => {
         if (!isHovered) {
           setShowMessage(false);
@@ -76,33 +79,39 @@ export function RobotGuide({
       }, 5000);
       return () => clearTimeout(timer);
     }
-  }, [currentSection, isHovered, isWelcome]);
+  }, [currentSection, isHovered, isWelcome, speechEnabled]);
 
   // Show message when section changes
   useEffect(() => {
-    setShowMessage(true);
-  }, [currentSection]);
+    if (speechEnabled) {
+      setShowMessage(true);
+      setIsMoving(true);
+      const timer = setTimeout(() => setIsMoving(false), 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [currentSection, speechEnabled]);
 
   if (!isVisible || !currentData) return null;
 
-  const robotSize = isWelcome ? "w-48 h-56" : "w-24 h-28";
-  const headSize = isWelcome ? "w-32 h-28" : "w-16 h-14";
-  const eyeSize = isWelcome ? "w-4 h-4" : "w-2 h-2";
-  const eyeGap = isWelcome ? "gap-6" : "gap-3";
+  const robotSize = isWelcome ? "w-32 h-40" : "w-20 h-28";
+  const headSize = isWelcome ? "w-20 h-16" : "w-12 h-10";
+  const eyeSize = isWelcome ? "w-2 h-2" : "w-1.5 h-1.5";
+  const eyeGap = isWelcome ? "gap-4" : "gap-2";
 
   return (
     <motion.div
-      className="fixed z-[100] cursor-pointer"
+      className="fixed z-[200] cursor-pointer"
       style={currentData.position}
+      initial={currentData.position}
       animate={currentData.position}
       transition={{
-        duration: 1.5,
+        duration: 2,
         ease: [0.25, 0.46, 0.45, 0.94],
       }}
       onClick={onRobotClick}
       onMouseEnter={() => {
         setIsHovered(true);
-        setShowMessage(true);
+        if (speechEnabled) setShowMessage(true);
       }}
       onMouseLeave={() => {
         setIsHovered(false);
@@ -110,44 +119,74 @@ export function RobotGuide({
     >
       {/* Message Container */}
       <AnimatePresence>
-        {showMessage && (
+        {showMessage && speechEnabled && (
           <motion.div
-            className={`absolute ${
-              isWelcome
-                ? "top-full mt-8 left-1/2 transform -translate-x-1/2 w-96 max-w-[90vw]"
-                : currentSection === "home" || currentSection === "services"
-                ? "right-full mr-6 top-1/2 transform -translate-y-1/2 w-80 max-w-[40vw]"
-                : currentSection === "about" || currentSection === "projects"
-                ? "left-full ml-6 top-1/2 transform -translate-y-1/2 w-80 max-w-[40vw]"
-                : "bottom-full mb-6 left-1/2 transform -translate-x-1/2 w-80 max-w-[90vw]"
+            className={`absolute z-10 ${
+              currentData.messageDirection === "bottom"
+                ? "top-full mt-6 left-1/2 transform -translate-x-1/2 w-80"
+                : currentData.messageDirection === "right"
+                ? "left-full ml-4 top-1/2 transform -translate-y-1/2 w-72"
+                : currentData.messageDirection === "left"
+                ? "right-full mr-4 top-1/2 transform -translate-y-1/2 w-72"
+                : "bottom-full mb-6 left-1/2 transform -translate-x-1/2 w-72"
             }`}
-            initial={{ opacity: 0, scale: 0.8, y: isWelcome ? -20 : 0 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.8 }}
+            initial={{
+              opacity: 0,
+              scale: 0.8,
+              x:
+                currentData.messageDirection === "right"
+                  ? -20
+                  : currentData.messageDirection === "left"
+                  ? 20
+                  : 0,
+              y:
+                currentData.messageDirection === "bottom"
+                  ? -20
+                  : currentData.messageDirection === "top"
+                  ? 20
+                  : 0,
+            }}
+            animate={{ opacity: 1, scale: 1, x: 0, y: 0 }}
+            exit={{
+              opacity: 0,
+              scale: 0.8,
+              x:
+                currentData.messageDirection === "right"
+                  ? -10
+                  : currentData.messageDirection === "left"
+                  ? 10
+                  : 0,
+              y:
+                currentData.messageDirection === "bottom"
+                  ? -10
+                  : currentData.messageDirection === "top"
+                  ? 10
+                  : 0,
+            }}
             transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
           >
             <div
-              className={`bg-white/95 backdrop-blur-xl rounded-3xl p-6 shadow-2xl border border-gray-200/50 ${
+              className={`bg-gray-900/95 backdrop-blur-xl rounded-2xl p-4 shadow-2xl border border-gray-700/50 text-white relative ${
                 isWelcome ? "text-center" : "text-left"
               }`}
             >
               <h3
-                className={`font-black mb-4 text-gray-900 ${
-                  isWelcome ? "text-2xl md:text-3xl" : "text-lg"
+                className={`font-bold mb-2 ${
+                  isWelcome ? "text-xl md:text-2xl" : "text-base"
                 }`}
               >
                 {currentData.title}
               </h3>
               <p
-                className={`text-gray-700 leading-relaxed ${
-                  isWelcome ? "text-base md:text-lg" : "text-sm"
+                className={`text-gray-300 leading-relaxed ${
+                  isWelcome ? "text-sm md:text-base" : "text-xs"
                 }`}
               >
                 {currentData.description}
               </p>
               {isWelcome && (
                 <motion.div
-                  className="mt-6 text-cyan-600 font-bold text-base"
+                  className="mt-4 text-cyan-400 font-bold text-sm"
                   animate={{ opacity: [0.5, 1, 0.5] }}
                   transition={{ duration: 2, repeat: Infinity }}
                 >
@@ -155,34 +194,21 @@ export function RobotGuide({
                 </motion.div>
               )}
               {!isWelcome && (
-                <div className="mt-4 text-xs text-gray-500">
+                <div className="mt-2 text-xs text-gray-500">
                   Hover to keep message visible
                 </div>
               )}
-            </div>
 
-            {/* Speech bubble pointer */}
-            <div
-              className={`absolute ${
-                isWelcome
-                  ? "top-0 left-1/2 transform -translate-x-1/2 -translate-y-full"
-                  : currentSection === "home" || currentSection === "services"
-                  ? "left-full top-1/2 transform -translate-y-1/2 -translate-x-2"
-                  : currentSection === "about" || currentSection === "projects"
-                  ? "right-full top-1/2 transform -translate-y-1/2 translate-x-2"
-                  : "bottom-0 left-1/2 transform -translate-x-1/2 translate-y-full"
-              }`}
-            >
+              {/* Speech bubble pointer */}
               <div
-                className={`${
-                  isWelcome
-                    ? "border-l-[20px] border-r-[20px] border-b-[15px] border-l-transparent border-r-transparent border-b-white/95"
-                    : currentSection === "home" || currentSection === "services"
-                    ? "border-t-[15px] border-b-[15px] border-l-[20px] border-t-transparent border-b-transparent border-l-white/95"
-                    : currentSection === "about" ||
-                      currentSection === "projects"
-                    ? "border-t-[15px] border-b-[15px] border-r-[20px] border-t-transparent border-b-transparent border-r-white/95"
-                    : "border-l-[20px] border-r-[20px] border-t-[15px] border-l-transparent border-r-transparent border-t-white/95"
+                className={`absolute ${
+                  currentData.messageDirection === "bottom"
+                    ? "top-0 left-1/2 transform -translate-x-1/2 -translate-y-full border-l-[12px] border-r-[12px] border-b-[8px] border-l-transparent border-r-transparent border-b-gray-900/95"
+                    : currentData.messageDirection === "right"
+                    ? "right-full top-1/2 transform -translate-y-1/2 translate-x-1 border-t-[8px] border-b-[8px] border-r-[12px] border-t-transparent border-b-transparent border-r-gray-900/95"
+                    : currentData.messageDirection === "left"
+                    ? "left-full top-1/2 transform -translate-y-1/2 -translate-x-1 border-t-[8px] border-b-[8px] border-l-[12px] border-t-transparent border-b-transparent border-l-gray-900/95"
+                    : "bottom-0 left-1/2 transform -translate-x-1/2 translate-y-full border-l-[12px] border-r-[12px] border-t-[8px] border-l-transparent border-r-transparent border-t-gray-900/95"
                 }`}
               />
             </div>
@@ -192,10 +218,10 @@ export function RobotGuide({
 
       {/* Robot Container */}
       <motion.div
-        className={`relative ${robotSize} hover:scale-110 transition-transform duration-300`}
+        className={`relative ${robotSize}`}
         animate={{
-          y: [0, -8, 0],
-          rotate: [0, 1, -1, 0],
+          y: [0, -6, 0],
+          rotate: isMoving ? [0, 5, -5, 0] : [0, 1, -1, 0],
         }}
         transition={{
           duration: isWelcome ? 3 : 4,
@@ -207,16 +233,16 @@ export function RobotGuide({
       >
         {/* Robot Body */}
         <motion.div
-          className={`${robotSize} mx-auto relative rounded-3xl`}
+          className={`${robotSize} mx-auto relative rounded-2xl`}
           style={{
             background: "linear-gradient(145deg, #2d3748, #1a202c, #000000)",
-            boxShadow: "0 20px 60px rgba(0, 0, 0, 0.3)",
+            boxShadow: "0 15px 40px rgba(0, 0, 0, 0.3)",
           }}
           animate={{
             boxShadow: [
-              "0 20px 60px rgba(0, 0, 0, 0.3)",
-              "0 25px 80px rgba(59, 130, 246, 0.2)",
-              "0 20px 60px rgba(0, 0, 0, 0.3)",
+              "0 15px 40px rgba(0, 0, 0, 0.3)",
+              "0 20px 50px rgba(59, 130, 246, 0.2)",
+              "0 15px 40px rgba(0, 0, 0, 0.3)",
             ],
           }}
           transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
@@ -224,20 +250,20 @@ export function RobotGuide({
           {/* Robot Head */}
           <motion.div
             className={`absolute ${
-              isWelcome ? "-top-8" : "-top-5"
-            } left-1/2 transform -translate-x-1/2 ${headSize} rounded-2xl`}
+              isWelcome ? "-top-6" : "-top-4"
+            } left-1/2 transform -translate-x-1/2 ${headSize} rounded-xl`}
             style={{
               background: "linear-gradient(145deg, #4a5568, #2d3748)",
             }}
             animate={{
-              rotate: [0, 3, -3, 0],
+              rotate: [0, 2, -2, 0],
             }}
             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
           >
             {/* Eyes */}
             <div
               className={`absolute ${
-                isWelcome ? "top-6" : "top-3"
+                isWelcome ? "top-4" : "top-2"
               } left-1/2 transform -translate-x-1/2 flex ${eyeGap}`}
             >
               {[0, 1].map((i) => (
@@ -254,7 +280,7 @@ export function RobotGuide({
                     ease: "easeInOut",
                     times: [0, 0.9, 1],
                   }}
-                  style={{ boxShadow: "0 0 15px rgba(6, 182, 212, 0.8)" }}
+                  style={{ boxShadow: "0 0 10px rgba(6, 182, 212, 0.8)" }}
                 />
               ))}
             </div>
@@ -262,15 +288,15 @@ export function RobotGuide({
             {/* Mouth */}
             <motion.div
               className={`absolute ${
-                isWelcome ? "bottom-4" : "bottom-2"
+                isWelcome ? "bottom-2" : "bottom-1"
               } left-1/2 transform -translate-x-1/2 ${
-                isWelcome ? "h-2" : "h-1"
+                isWelcome ? "h-1" : "h-0.5"
               } bg-cyan-400 rounded-sm`}
               animate={{
                 width: [
-                  isWelcome ? 40 : 20,
-                  isWelcome ? 24 : 12,
-                  isWelcome ? 40 : 20,
+                  isWelcome ? 24 : 16,
+                  isWelcome ? 16 : 10,
+                  isWelcome ? 24 : 16,
                 ],
               }}
               transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
@@ -279,28 +305,28 @@ export function RobotGuide({
             {/* Antenna */}
             <motion.div
               className={`absolute ${
-                isWelcome ? "-top-12" : "-top-9"
+                isWelcome ? "-top-8" : "-top-6"
               } left-1/2 transform -translate-x-1/2 ${
-                isWelcome ? "w-2 h-6" : "w-1 h-4"
+                isWelcome ? "w-1 h-4" : "w-0.5 h-3"
               }`}
               style={{
                 background: "linear-gradient(to top, #4a5568, #718096)",
               }}
-              animate={{ rotate: [0, 10, 0] }}
+              animate={{ rotate: [0, 8, 0] }}
               transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
             >
               <motion.div
                 className={`absolute ${
                   isWelcome
-                    ? "-top-3 -left-2 w-4 h-4"
-                    : "-top-1.5 -left-1 w-2 h-2"
+                    ? "-top-2 -left-1 w-2 h-2"
+                    : "-top-1 -left-0.5 w-1 h-1"
                 } rounded-full`}
                 style={{
                   background: "radial-gradient(circle, #ef4444, #dc2626)",
                 }}
                 animate={{
                   opacity: [1, 0.3, 1],
-                  scale: [1, 1.3, 1],
+                  scale: [1, 1.2, 1],
                 }}
                 transition={{
                   duration: 1.5,
@@ -314,16 +340,16 @@ export function RobotGuide({
           {/* Chest Light */}
           <motion.div
             className={`absolute ${
-              isWelcome ? "top-12" : "top-5"
+              isWelcome ? "top-8" : "top-4"
             } left-1/2 transform -translate-x-1/2 ${
-              isWelcome ? "w-16 h-16" : "w-8 h-8"
-            } rounded-full border-4 border-cyan-400/40`}
+              isWelcome ? "w-10 h-10" : "w-6 h-6"
+            } rounded-full border-2 border-cyan-400/40`}
             style={{
               background:
                 "linear-gradient(45deg, rgba(100, 100, 100, 0.3), rgba(50, 50, 50, 0.2))",
             }}
             animate={{
-              scale: [1, 1.1, 1],
+              scale: [1, 1.05, 1],
               borderColor: [
                 "rgba(6, 182, 212, 0.4)",
                 "rgba(6, 182, 212, 0.8)",
@@ -334,11 +360,11 @@ export function RobotGuide({
           >
             <motion.div
               className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ${
-                isWelcome ? "w-6 h-6" : "w-2.5 h-2.5"
+                isWelcome ? "w-3 h-3" : "w-1.5 h-1.5"
               } bg-cyan-400 rounded-full`}
               animate={{ opacity: [1, 0.3, 1] }}
               transition={{ duration: 1, repeat: Infinity, ease: "easeInOut" }}
-              style={{ boxShadow: "0 0 20px rgba(6, 182, 212, 0.8)" }}
+              style={{ boxShadow: "0 0 15px rgba(6, 182, 212, 0.8)" }}
             />
           </motion.div>
 
@@ -347,22 +373,22 @@ export function RobotGuide({
             <motion.div
               key={side}
               className={`absolute ${
-                isWelcome ? "top-8 w-12 h-3" : "top-4 w-6 h-1.5"
+                isWelcome ? "top-6 w-8 h-2" : "top-3 w-4 h-1"
               } rounded-sm ${
                 side === "left"
                   ? isWelcome
-                    ? "-left-8"
-                    : "-left-4"
+                    ? "-left-6"
+                    : "-left-3"
                   : isWelcome
-                  ? "-right-8"
-                  : "-right-4"
+                  ? "-right-6"
+                  : "-right-3"
               }`}
               style={{
                 background: "linear-gradient(45deg, #4a5568, #2d3748)",
                 transformOrigin:
                   side === "left" ? "right center" : "left center",
               }}
-              animate={{ rotate: [0, 25, -10, 0] }}
+              animate={{ rotate: [0, 20, -8, 0] }}
               transition={{
                 duration: 3,
                 repeat: Infinity,
@@ -375,9 +401,9 @@ export function RobotGuide({
           {/* Click indicator for welcome */}
           {isWelcome && (
             <motion.div
-              className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-cyan-400 text-2xl"
+              className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 text-cyan-400 text-xl"
               animate={{
-                y: [0, -10, 0],
+                y: [0, -8, 0],
                 opacity: [0.5, 1, 0.5],
               }}
               transition={{ duration: 1.5, repeat: Infinity }}

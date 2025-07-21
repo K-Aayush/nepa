@@ -31,7 +31,7 @@ const features = [
 
 export function AboutSection() {
   return (
-    <section className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-gray-50 to-white pr-8 pl-80">
+    <section className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-gray-50 to-white px-8">
       <div className="max-w-4xl mx-auto text-left px-8 relative z-10">
         <motion.h2
           className="text-4xl md:text-5xl font-black mb-8 text-gray-900"
