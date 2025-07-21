@@ -18,7 +18,7 @@ import { Footer } from "@/components/footer";
 
 const sections = ["home", "about", "services", "projects", "contact"];
 
-export default function Home() {
+export default function Main() {
   const [currentSection, setCurrentSection] = useState("home");
   const [isLoading, setIsLoading] = useState(true);
 
