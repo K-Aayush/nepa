@@ -43,7 +43,7 @@ export function HomeSection({ onNavigate }: HomeSectionProps) {
   }, []);
 
   return (
-    <section className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-white to-gray-50 pl-8 pr-80">
+    <section className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-white to-gray-50 px-8">
       <div className="max-w-4xl mx-auto text-left px-8 relative z-10">
         <motion.h1
           className="text-4xl md:text-6xl lg:text-7xl font-black mb-6 bg-gradient-to-r from-black via-gray-700 to-black bg-clip-text text-transparent"

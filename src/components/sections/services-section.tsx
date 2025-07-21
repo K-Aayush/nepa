@@ -43,7 +43,7 @@ const services = [
 
 export function ServicesSection() {
   return (
-    <section className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-white to-gray-50 pl-8 pr-80">
+    <section className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-white to-gray-50 px-8">
       <div className="max-w-5xl mx-auto text-left px-8 relative z-10">
         <motion.h2
           className="text-4xl md:text-5xl font-black mb-6 text-gray-900"
