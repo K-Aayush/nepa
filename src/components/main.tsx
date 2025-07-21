@@ -13,6 +13,7 @@ import { ServicesSection } from "@/components/sections/services-section";
 import { ProjectsSection } from "@/components/sections/projects-section";
 import { ContactSection } from "@/components/sections/contact-section";
 import { Footer } from "@/components/footer";
+import { Navbar } from "./navbar";
 
 const sections = [
   "welcome",
@@ -32,11 +33,45 @@ export default function Main() {
     return () => clearTimeout(timer);
   }, []);
 
+  const navigateToSection = (section: string) => {
+    setCurrentSection(section);
+    const element = document.getElementById(section);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  };
+
   const handleRobotClick = () => {
     const currentIndex = sections.indexOf(currentSection);
     const nextIndex = (currentIndex + 1) % sections.length;
     setCurrentSection(sections[nextIndex]);
   };
+
+  // Intersection Observer for section detection
+  useEffect(() => {
+    const observerOptions = {
+      threshold: 0.3,
+      rootMargin: "0px 0px -100px 0px",
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const sectionId = entry.target.id;
+          if (sections.includes(sectionId)) {
+            setCurrentSection(sectionId);
+          }
+        }
+      });
+    }, observerOptions);
+
+    sections.forEach((sectionId) => {
+      const element = document.getElementById(sectionId);
+      if (element) observer.observe(element);
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   const handleVisitWebsite = () => {
     window.open("https://www.nepatronix.org", "_blank");
@@ -99,6 +134,9 @@ export default function Main() {
 
       {/* Custom Cursor */}
       <CustomCursor />
+
+      {/* Navigation */}
+      <Navbar onNavigate={navigateToSection} />
 
       {/* Robot Guide */}
       <RobotGuide

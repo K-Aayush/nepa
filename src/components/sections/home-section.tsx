@@ -43,10 +43,10 @@ export function HomeSection({ onNavigate }: HomeSectionProps) {
   }, []);
 
   return (
-    <section className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-white to-gray-50">
-      <div className="max-w-6xl mx-auto text-center px-8 relative z-10">
+    <section className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-white to-gray-50 pl-8 pr-80">
+      <div className="max-w-4xl mx-auto text-left px-8 relative z-10">
         <motion.h1
-          className="text-6xl md:text-8xl lg:text-10xl font-black mb-8 bg-gradient-to-r from-black via-gray-700 to-black bg-clip-text text-transparent"
+          className="text-4xl md:text-6xl lg:text-7xl font-black mb-6 bg-gradient-to-r from-black via-gray-700 to-black bg-clip-text text-transparent"
           initial={{ opacity: 0, y: 100 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, ease: [0.4, 0, 0.2, 1] }}
@@ -69,7 +69,7 @@ export function HomeSection({ onNavigate }: HomeSectionProps) {
         </motion.h1>
 
         <motion.p
-          className="text-2xl md:text-3xl mb-6 font-bold text-black"
+          className="text-xl md:text-2xl mb-4 font-bold text-black"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.3 }}
@@ -78,19 +78,20 @@ export function HomeSection({ onNavigate }: HomeSectionProps) {
         </motion.p>
 
         <motion.p
-          className="text-lg md:text-xl mb-12 text-gray-700 max-w-4xl mx-auto leading-relaxed"
+          className="text-base md:text-lg mb-8 text-gray-700 max-w-3xl leading-relaxed"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.5 }}
         >
           Your one-stop solution for cutting-edge IoT services and products.
-          Nepal&apos;s leading IoT and Robotics company, pioneering the future of
-          automation, artificial intelligence, and smart technology solutions.
+          Nepal&apos;s leading IoT and Robotics company, pioneering the future
+          of automation, artificial intelligence, and smart technology
+          solutions.
         </motion.p>
 
         {/* Stats Grid */}
         <motion.div
-          className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12"
+          className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.7 }}
@@ -98,7 +99,7 @@ export function HomeSection({ onNavigate }: HomeSectionProps) {
           {stats.map((stat, index) => (
             <motion.div
               key={stat.label}
-              className="bg-white/80 backdrop-blur-sm p-8 rounded-3xl border border-gray-100 shadow-lg hover:shadow-xl transition-all duration-500"
+              className="bg-white/80 backdrop-blur-sm p-4 rounded-2xl border border-gray-100 shadow-lg hover:shadow-xl transition-all duration-500"
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.8 + index * 0.1 }}
@@ -109,7 +110,7 @@ export function HomeSection({ onNavigate }: HomeSectionProps) {
               }}
             >
               <motion.div
-                className="text-4xl md:text-5xl font-black text-gray-800 mb-4"
+                className="text-2xl md:text-3xl font-black text-gray-800 mb-2"
                 animate={stat.number > 0 ? { scale: [1, 1.05, 1] } : {}}
                 transition={{ duration: 2, repeat: Infinity, delay: 3 }}
               >

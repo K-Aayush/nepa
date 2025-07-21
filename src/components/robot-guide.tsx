@@ -21,28 +21,28 @@ const sectionMessages = {
     title: "🏠 Our Amazing Home",
     description:
       "Discover NepaTronix - Nepal's leading IoT and Robotics company with 67+ happy students, 15+ completed projects, and innovative solutions.",
-    position: { top: "20%", right: "5%", transform: "none" },
+    position: { top: "30%", right: "10%", transform: "none" },
     size: "medium",
   },
   about: {
     title: "🔬 Meet Our Team",
     description:
       "Learn about our vision and expertise in IoT development, automation, STEAM education, and cutting-edge research in AI and robotics.",
-    position: { top: "15%", left: "5%", transform: "none" },
+    position: { top: "25%", left: "10%", transform: "none" },
     size: "medium",
   },
   services: {
     title: "⚙️ Our Services",
     description:
       "From school IoT programs to industrial automation, mobile app integration, and technical training - we've got comprehensive solutions!",
-    position: { bottom: "20%", right: "5%", transform: "none" },
+    position: { bottom: "30%", right: "10%", transform: "none" },
     size: "medium",
   },
   projects: {
     title: "🚀 Innovation Showcase",
     description:
       "Explore our fire detection systems, LoRa networks, ultrasonic radar, smart street lights, and award-winning automation projects.",
-    position: { bottom: "15%", left: "5%", transform: "none" },
+    position: { bottom: "25%", left: "10%", transform: "none" },
     size: "medium",
   },
   contact: {
@@ -60,19 +60,27 @@ export function RobotGuide({
   isVisible,
 }: RobotGuideProps) {
   const [showMessage, setShowMessage] = useState(true);
-  const [isAnimating, setIsAnimating] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
   const currentData =
     sectionMessages[currentSection as keyof typeof sectionMessages];
   const isWelcome = currentSection === "welcome";
 
+  // Auto-hide message after 5 seconds (except for welcome)
   useEffect(() => {
-    setIsAnimating(true);
-    const timer = setTimeout(() => {
-      setShowMessage(true);
-      setIsAnimating(false);
-    }, 500);
-    return () => clearTimeout(timer);
+    if (!isWelcome) {
+      const timer = setTimeout(() => {
+        if (!isHovered) {
+          setShowMessage(false);
+        }
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [currentSection, isHovered, isWelcome]);
+
+  // Show message when section changes
+  useEffect(() => {
+    setShowMessage(true);
   }, [currentSection]);
 
   if (!isVisible || !currentData) return null;
@@ -92,6 +100,13 @@ export function RobotGuide({
         ease: [0.25, 0.46, 0.45, 0.94],
       }}
       onClick={onRobotClick}
+      onMouseEnter={() => {
+        setIsHovered(true);
+        setShowMessage(true);
+      }}
+      onMouseLeave={() => {
+        setIsHovered(false);
+      }}
     >
       {/* Message Container */}
       <AnimatePresence>
@@ -99,10 +114,12 @@ export function RobotGuide({
           <motion.div
             className={`absolute ${
               isWelcome
-                ? "top-full mt-8 left-1/2 transform -translate-x-1/2 max-w-2xl"
+                ? "top-full mt-8 left-1/2 transform -translate-x-1/2 w-96 max-w-[90vw]"
                 : currentSection === "home" || currentSection === "services"
-                ? "right-full mr-6 top-1/2 transform -translate-y-1/2 max-w-sm"
-                : "left-full ml-6 top-1/2 transform -translate-y-1/2 max-w-sm"
+                ? "right-full mr-6 top-1/2 transform -translate-y-1/2 w-80 max-w-[40vw]"
+                : currentSection === "about" || currentSection === "projects"
+                ? "left-full ml-6 top-1/2 transform -translate-y-1/2 w-80 max-w-[40vw]"
+                : "bottom-full mb-6 left-1/2 transform -translate-x-1/2 w-80 max-w-[90vw]"
             }`}
             initial={{ opacity: 0, scale: 0.8, y: isWelcome ? -20 : 0 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -116,26 +133,31 @@ export function RobotGuide({
             >
               <h3
                 className={`font-black mb-4 text-gray-900 ${
-                  isWelcome ? "text-3xl md:text-4xl" : "text-xl"
+                  isWelcome ? "text-2xl md:text-3xl" : "text-lg"
                 }`}
               >
                 {currentData.title}
               </h3>
               <p
                 className={`text-gray-700 leading-relaxed ${
-                  isWelcome ? "text-lg md:text-xl" : "text-sm"
+                  isWelcome ? "text-base md:text-lg" : "text-sm"
                 }`}
               >
                 {currentData.description}
               </p>
               {isWelcome && (
                 <motion.div
-                  className="mt-6 text-cyan-600 font-bold text-lg"
+                  className="mt-6 text-cyan-600 font-bold text-base"
                   animate={{ opacity: [0.5, 1, 0.5] }}
                   transition={{ duration: 2, repeat: Infinity }}
                 >
                   👆 Click me to start exploring!
                 </motion.div>
+              )}
+              {!isWelcome && (
+                <div className="mt-4 text-xs text-gray-500">
+                  Hover to keep message visible
+                </div>
               )}
             </div>
 
@@ -146,7 +168,9 @@ export function RobotGuide({
                   ? "top-0 left-1/2 transform -translate-x-1/2 -translate-y-full"
                   : currentSection === "home" || currentSection === "services"
                   ? "left-full top-1/2 transform -translate-y-1/2 -translate-x-2"
-                  : "right-full top-1/2 transform -translate-y-1/2 translate-x-2"
+                  : currentSection === "about" || currentSection === "projects"
+                  ? "right-full top-1/2 transform -translate-y-1/2 translate-x-2"
+                  : "bottom-0 left-1/2 transform -translate-x-1/2 translate-y-full"
               }`}
             >
               <div
@@ -155,7 +179,10 @@ export function RobotGuide({
                     ? "border-l-[20px] border-r-[20px] border-b-[15px] border-l-transparent border-r-transparent border-b-white/95"
                     : currentSection === "home" || currentSection === "services"
                     ? "border-t-[15px] border-b-[15px] border-l-[20px] border-t-transparent border-b-transparent border-l-white/95"
-                    : "border-t-[15px] border-b-[15px] border-r-[20px] border-t-transparent border-b-transparent border-r-white/95"
+                    : currentSection === "about" ||
+                      currentSection === "projects"
+                    ? "border-t-[15px] border-b-[15px] border-r-[20px] border-t-transparent border-b-transparent border-r-white/95"
+                    : "border-l-[20px] border-r-[20px] border-t-[15px] border-l-transparent border-r-transparent border-t-white/95"
                 }`}
               />
             </div>
