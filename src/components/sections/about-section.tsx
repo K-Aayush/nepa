@@ -13,6 +13,14 @@ const milestones = [
     alt: "NepaTronix founding team in Kupondole",
   },
   {
+    year: "2019",
+    title: "First Community Workshop",
+    description:
+      "Hosted our inaugural IoT workshop at a local college, sparking interest in smart technology among students.",
+    image: "/communityworkshopabout.jpg",
+    alt: "NepaTronix IoT workshop in college",
+  },
+  {
     year: "2020",
     title: "First IoT Product Launch",
     description:
@@ -29,12 +37,28 @@ const milestones = [
     alt: "NepaTronix tutoring session",
   },
   {
+    year: "2022",
+    title: "Tech Exhibition Showcase",
+    description:
+      "Showcased innovative IoT and app solutions at a national tech exhibition, earning industry recognition.",
+    image: "/exhibitionabout.jpg",
+    alt: "NepaTronix at tech exhibition",
+  },
+  {
     year: "2023",
     title: "Global Recognition",
     description:
       "Recognized as a fast-growing tech leader, delivering solutions worldwide.",
     image: "/award.jpg",
     alt: "NepaTronix receiving global recognition",
+  },
+  {
+    year: "2024",
+    title: "Regional College Workshops",
+    description:
+      "Expanded our workshop series to colleges across Nepal, promoting IoT and coding skills.",
+    image: "/collegeworkshop.jpg",
+    alt: "NepaTronix college workshop series",
   },
   {
     year: "2025",
