@@ -21,7 +21,7 @@ export function Navbar({ activeSection }: NavbarProps) {
 
   return (
     <motion.nav
-      className="fixed top-0 w-full flex justify-center items-center z-10"
+      className="fixed top-0 w-full flex justify-center items-center z-100"
       style={{ backgroundColor: "transparent", padding: "20px 60px" }}
       initial={{ y: -100 }}
       animate={{ y: 0 }}

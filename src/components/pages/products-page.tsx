@@ -13,7 +13,7 @@ const ProductsPage = () => {
   return (
     <div className="w-full scroll-smooth">
       {/* Hero Section - Product in Center with Features on Both Sides */}
-      <section className="bg-gradient-to-br from-blue-50 to-cyan-100 min-h-screen flex items-center justify-center px-4 md:px-8 relative overflow-hidden">
+      <section className="bg-gradient-to-br py-26 md:py-32 from-blue-50 to-cyan-100 min-h-screen flex items-center justify-center px-4 md:px-8 relative overflow-hidden">
         {/* Animated background elements */}
         {isClient && (
           <>
@@ -43,7 +43,7 @@ const ProductsPage = () => {
             />
           </>
         )}
-        
+
         <div className="max-w-7xl w-full mx-auto relative z-10">
           {/* Title */}
           {isClient ? (
@@ -53,7 +53,7 @@ const ProductsPage = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.2, ease: "easeOut" }}
             >
-              <motion.h1 
+              <motion.h1
                 className="text-5xl md:text-7xl font-black text-gray-800 leading-tight mb-6"
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -61,7 +61,7 @@ const ProductsPage = () => {
               >
                 Smart IoT Hub Pro
               </motion.h1>
-              <motion.p 
+              <motion.p
                 className="text-xl md:text-2xl text-gray-600"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -85,16 +85,25 @@ const ProductsPage = () => {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
             {/* Left Features */}
             {isClient ? (
-              <motion.div 
+              <motion.div
                 className="space-y-8"
                 initial={{ opacity: 0, x: -100 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 1.2, delay: 0.8 }}
               >
                 {[
-                  { title: "AI-Powered Control", desc: "Intelligent automation for your entire home ecosystem" },
-                  { title: "Voice Commands", desc: "Advanced voice recognition with natural language processing" },
-                  { title: "Energy Optimization", desc: "Smart energy management reduces consumption by 40%" }
+                  {
+                    title: "AI-Powered Control",
+                    desc: "Intelligent automation for your entire home ecosystem",
+                  },
+                  {
+                    title: "Voice Commands",
+                    desc: "Advanced voice recognition with natural language processing",
+                  },
+                  {
+                    title: "Energy Optimization",
+                    desc: "Smart energy management reduces consumption by 40%",
+                  },
                 ].map((feature, index) => (
                   <motion.div
                     key={index}
@@ -102,9 +111,15 @@ const ProductsPage = () => {
                     initial={{ opacity: 0, x: -50 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.8, delay: 1 + index * 0.2 }}
-                    whileHover={{ scale: 1.05, x: 10, boxShadow: "0 20px 40px rgba(59, 130, 246, 0.15)" }}
+                    whileHover={{
+                      scale: 1.05,
+                      x: 10,
+                      boxShadow: "0 20px 40px rgba(59, 130, 246, 0.15)",
+                    }}
                   >
-                    <h3 className="text-xl font-bold text-gray-800 mb-2">{feature.title}</h3>
+                    <h3 className="text-xl font-bold text-gray-800 mb-2">
+                      {feature.title}
+                    </h3>
                     <p className="text-gray-600">{feature.desc}</p>
                   </motion.div>
                 ))}
@@ -112,15 +127,26 @@ const ProductsPage = () => {
             ) : (
               <div className="space-y-8">
                 {[
-                  { title: "AI-Powered Control", desc: "Intelligent automation for your entire home ecosystem" },
-                  { title: "Voice Commands", desc: "Advanced voice recognition with natural language processing" },
-                  { title: "Energy Optimization", desc: "Smart energy management reduces consumption by 40%" }
+                  {
+                    title: "AI-Powered Control",
+                    desc: "Intelligent automation for your entire home ecosystem",
+                  },
+                  {
+                    title: "Voice Commands",
+                    desc: "Advanced voice recognition with natural language processing",
+                  },
+                  {
+                    title: "Energy Optimization",
+                    desc: "Smart energy management reduces consumption by 40%",
+                  },
                 ].map((feature, index) => (
                   <div
                     key={index}
                     className="bg-white/80 backdrop-blur-sm p-6 rounded-2xl shadow-lg border border-blue-100"
                   >
-                    <h3 className="text-xl font-bold text-gray-800 mb-2">{feature.title}</h3>
+                    <h3 className="text-xl font-bold text-gray-800 mb-2">
+                      {feature.title}
+                    </h3>
                     <p className="text-gray-600">{feature.desc}</p>
                   </div>
                 ))}
@@ -129,13 +155,13 @@ const ProductsPage = () => {
 
             {/* Center Product Image */}
             {isClient ? (
-              <motion.div 
+              <motion.div
                 className="flex justify-center"
                 initial={{ opacity: 0, scale: 0.5, rotate: -20 }}
                 animate={{ opacity: 1, scale: 1, rotate: 0 }}
                 transition={{ duration: 1.5, delay: 0.5 }}
               >
-                <motion.div 
+                <motion.div
                   className="relative w-80 h-80 lg:w-96 lg:h-96"
                   whileHover={{ scale: 1.1, rotate: 5 }}
                   animate={{
@@ -144,7 +170,7 @@ const ProductsPage = () => {
                   transition={{
                     duration: 4,
                     repeat: Infinity,
-                    ease: "easeInOut"
+                    ease: "easeInOut",
                   }}
                 >
                   <Image
@@ -174,16 +200,25 @@ const ProductsPage = () => {
 
             {/* Right Features */}
             {isClient ? (
-              <motion.div 
+              <motion.div
                 className="space-y-8"
                 initial={{ opacity: 0, x: 100 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 1.2, delay: 0.8 }}
               >
                 {[
-                  { title: "Secure Connectivity", desc: "Military-grade encryption protects all your devices" },
-                  { title: "Real-time Analytics", desc: "Advanced monitoring with predictive insights" },
-                  { title: "Easy Setup", desc: "Plug-and-play installation in under 5 minutes" }
+                  {
+                    title: "Secure Connectivity",
+                    desc: "Military-grade encryption protects all your devices",
+                  },
+                  {
+                    title: "Real-time Analytics",
+                    desc: "Advanced monitoring with predictive insights",
+                  },
+                  {
+                    title: "Easy Setup",
+                    desc: "Plug-and-play installation in under 5 minutes",
+                  },
                 ].map((feature, index) => (
                   <motion.div
                     key={index}
@@ -191,9 +226,15 @@ const ProductsPage = () => {
                     initial={{ opacity: 0, x: 50 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.8, delay: 1 + index * 0.2 }}
-                    whileHover={{ scale: 1.05, x: -10, boxShadow: "0 20px 40px rgba(59, 130, 246, 0.15)" }}
+                    whileHover={{
+                      scale: 1.05,
+                      x: -10,
+                      boxShadow: "0 20px 40px rgba(59, 130, 246, 0.15)",
+                    }}
                   >
-                    <h3 className="text-xl font-bold text-gray-800 mb-2">{feature.title}</h3>
+                    <h3 className="text-xl font-bold text-gray-800 mb-2">
+                      {feature.title}
+                    </h3>
                     <p className="text-gray-600">{feature.desc}</p>
                   </motion.div>
                 ))}
@@ -201,15 +242,26 @@ const ProductsPage = () => {
             ) : (
               <div className="space-y-8">
                 {[
-                  { title: "Secure Connectivity", desc: "Military-grade encryption protects all your devices" },
-                  { title: "Real-time Analytics", desc: "Advanced monitoring with predictive insights" },
-                  { title: "Easy Setup", desc: "Plug-and-play installation in under 5 minutes" }
+                  {
+                    title: "Secure Connectivity",
+                    desc: "Military-grade encryption protects all your devices",
+                  },
+                  {
+                    title: "Real-time Analytics",
+                    desc: "Advanced monitoring with predictive insights",
+                  },
+                  {
+                    title: "Easy Setup",
+                    desc: "Plug-and-play installation in under 5 minutes",
+                  },
                 ].map((feature, index) => (
                   <div
                     key={index}
                     className="bg-white/80 backdrop-blur-sm p-6 rounded-2xl shadow-lg border border-blue-100"
                   >
-                    <h3 className="text-xl font-bold text-gray-800 mb-2">{feature.title}</h3>
+                    <h3 className="text-xl font-bold text-gray-800 mb-2">
+                      {feature.title}
+                    </h3>
                     <p className="text-gray-600">{feature.desc}</p>
                   </div>
                 ))}
@@ -225,9 +277,12 @@ const ProductsPage = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 1.8 }}
             >
-              <motion.button 
+              <motion.button
                 className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-12 rounded-full transition-all duration-300 shadow-xl text-lg"
-                whileHover={{ scale: 1.1, boxShadow: "0 15px 40px rgba(59, 130, 246, 0.4)" }}
+                whileHover={{
+                  scale: 1.1,
+                  boxShadow: "0 15px 40px rgba(59, 130, 246, 0.4)",
+                }}
                 whileTap={{ scale: 0.95 }}
               >
                 EXPLORE FEATURES
@@ -244,7 +299,7 @@ const ProductsPage = () => {
       </section>
 
       {/* Second Section - Image Left, Features Right */}
-      <section className="bg-gradient-to-br from-green-50 to-emerald-100 min-h-screen flex items-center justify-center px-4 md:px-8 relative overflow-hidden">
+      <section className="bg-gradient-to-br py-8 md:py-16 from-green-50 to-emerald-100 min-h-screen flex items-center justify-center px-4 md:px-8 relative overflow-hidden">
         {/* Animated background elements */}
         {isClient && (
           <>
@@ -274,18 +329,18 @@ const ProductsPage = () => {
             />
           </>
         )}
-        
+
         <div className="max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
           {/* Left - Product Image */}
           {isClient ? (
-            <motion.div 
+            <motion.div
               className="flex justify-center"
               initial={{ opacity: 0, x: -100, scale: 0.8 }}
               whileInView={{ opacity: 1, x: 0, scale: 1 }}
               transition={{ duration: 1.2, delay: 0.2 }}
               viewport={{ once: true }}
             >
-              <motion.div 
+              <motion.div
                 className="relative w-96 h-96"
                 whileHover={{ scale: 1.1, rotate: -5 }}
                 transition={{ duration: 0.4 }}
@@ -293,7 +348,7 @@ const ProductsPage = () => {
                   rotateY: [0, 10, 0, -10, 0],
                 }}
                 style={{
-                  transformStyle: "preserve-3d"
+                  transformStyle: "preserve-3d",
                 }}
               >
                 <motion.div
@@ -333,7 +388,7 @@ const ProductsPage = () => {
 
           {/* Right - Features */}
           {isClient ? (
-            <motion.div 
+            <motion.div
               className="space-y-8"
               initial={{ opacity: 0, x: 100 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -355,26 +410,26 @@ const ProductsPage = () => {
               </motion.div>
 
               {[
-                { 
-                  title: "4K Ultra HD Recording", 
+                {
+                  title: "4K Ultra HD Recording",
                   desc: "Crystal clear footage with night vision capabilities",
-                  icon: "🎥"
+                  icon: "🎥",
                 },
-                { 
-                  title: "Smart Motion Detection", 
+                {
+                  title: "Smart Motion Detection",
                   desc: "AI distinguishes between people, pets, and packages",
-                  icon: "🔍"
+                  icon: "🔍",
                 },
-                { 
-                  title: "Cloud Storage", 
+                {
+                  title: "Cloud Storage",
                   desc: "Secure cloud backup with 30 days free storage",
-                  icon: "☁️"
+                  icon: "☁️",
                 },
-                { 
-                  title: "Mobile Alerts", 
+                {
+                  title: "Mobile Alerts",
                   desc: "Instant notifications sent directly to your phone",
-                  icon: "📱"
-                }
+                  icon: "📱",
+                },
               ].map((feature, index) => (
                 <motion.div
                   key={index}
@@ -383,7 +438,11 @@ const ProductsPage = () => {
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
                   viewport={{ once: true }}
-                  whileHover={{ scale: 1.02, x: 10, boxShadow: "0 20px 40px rgba(34, 197, 94, 0.15)" }}
+                  whileHover={{
+                    scale: 1.02,
+                    x: 10,
+                    boxShadow: "0 20px 40px rgba(34, 197, 94, 0.15)",
+                  }}
                 >
                   <motion.div
                     className="text-3xl"
@@ -393,19 +452,24 @@ const ProductsPage = () => {
                     {feature.icon}
                   </motion.div>
                   <div>
-                    <h3 className="text-xl font-bold text-gray-800 mb-2">{feature.title}</h3>
+                    <h3 className="text-xl font-bold text-gray-800 mb-2">
+                      {feature.title}
+                    </h3>
                     <p className="text-gray-600">{feature.desc}</p>
                   </div>
                 </motion.div>
               ))}
 
-              <motion.button 
+              <motion.button
                 className="bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-10 rounded-full transition-all duration-300 shadow-xl text-lg mt-8"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.8 }}
                 viewport={{ once: true }}
-                whileHover={{ scale: 1.1, boxShadow: "0 15px 40px rgba(34, 197, 94, 0.4)" }}
+                whileHover={{
+                  scale: 1.1,
+                  boxShadow: "0 15px 40px rgba(34, 197, 94, 0.4)",
+                }}
                 whileTap={{ scale: 0.95 }}
               >
                 VIEW SECURITY FEATURES
@@ -423,36 +487,36 @@ const ProductsPage = () => {
               </div>
 
               {[
-                { 
-                  title: "4K Ultra HD Recording", 
+                {
+                  title: "4K Ultra HD Recording",
                   desc: "Crystal clear footage with night vision capabilities",
-                  icon: "🎥"
+                  icon: "🎥",
                 },
-                { 
-                  title: "Smart Motion Detection", 
+                {
+                  title: "Smart Motion Detection",
                   desc: "AI distinguishes between people, pets, and packages",
-                  icon: "🔍"
+                  icon: "🔍",
                 },
-                { 
-                  title: "Cloud Storage", 
+                {
+                  title: "Cloud Storage",
                   desc: "Secure cloud backup with 30 days free storage",
-                  icon: "☁️"
+                  icon: "☁️",
                 },
-                { 
-                  title: "Mobile Alerts", 
+                {
+                  title: "Mobile Alerts",
                   desc: "Instant notifications sent directly to your phone",
-                  icon: "📱"
-                }
+                  icon: "📱",
+                },
               ].map((feature, index) => (
                 <div
                   key={index}
                   className="flex items-start space-x-4 bg-white/80 backdrop-blur-sm p-6 rounded-2xl shadow-lg border border-green-100"
                 >
-                  <div className="text-3xl">
-                    {feature.icon}
-                  </div>
+                  <div className="text-3xl">{feature.icon}</div>
                   <div>
-                    <h3 className="text-xl font-bold text-gray-800 mb-2">{feature.title}</h3>
+                    <h3 className="text-xl font-bold text-gray-800 mb-2">
+                      {feature.title}
+                    </h3>
                     <p className="text-gray-600">{feature.desc}</p>
                   </div>
                 </div>
@@ -467,7 +531,7 @@ const ProductsPage = () => {
       </section>
 
       {/* Third Section - Features Left, Image Right */}
-      <section className="bg-gradient-to-br from-purple-50 to-indigo-100 min-h-screen flex items-center justify-center px-4 md:px-8 relative overflow-hidden">
+      <section className="bg-gradient-to-br py-8 md:py-16 from-purple-50 to-indigo-100 min-h-screen flex items-center justify-center px-4 md:px-8 relative overflow-hidden">
         {/* Animated background elements */}
         {isClient && (
           <>
@@ -498,11 +562,11 @@ const ProductsPage = () => {
             />
           </>
         )}
-        
+
         <div className="max-w-7xl w-full mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
           {/* Left - Features */}
           {isClient ? (
-            <motion.div 
+            <motion.div
               className="space-y-8"
               initial={{ opacity: 0, x: -100 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -524,26 +588,26 @@ const ProductsPage = () => {
               </motion.div>
 
               {[
-                { 
-                  title: "Mesh Network Technology", 
+                {
+                  title: "Mesh Network Technology",
                   desc: "Self-healing network that adapts to changing conditions",
-                  icon: "🌐"
+                  icon: "🌐",
                 },
-                { 
-                  title: "Ultra-Low Power", 
+                {
+                  title: "Ultra-Low Power",
                   desc: "10-year battery life with intelligent power management",
-                  icon: "🔋"
+                  icon: "🔋",
                 },
-                { 
-                  title: "Weather Resistant", 
+                {
+                  title: "Weather Resistant",
                   desc: "IP67 rated for outdoor and indoor installations",
-                  icon: "🌦️"
+                  icon: "🌦️",
                 },
-                { 
-                  title: "Real-time Data", 
+                {
+                  title: "Real-time Data",
                   desc: "Instant sensor readings with millisecond precision",
-                  icon: "⚡"
-                }
+                  icon: "⚡",
+                },
               ].map((feature, index) => (
                 <motion.div
                   key={index}
@@ -552,7 +616,11 @@ const ProductsPage = () => {
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
                   viewport={{ once: true }}
-                  whileHover={{ scale: 1.02, x: -10, boxShadow: "0 20px 40px rgba(147, 51, 234, 0.15)" }}
+                  whileHover={{
+                    scale: 1.02,
+                    x: -10,
+                    boxShadow: "0 20px 40px rgba(147, 51, 234, 0.15)",
+                  }}
                 >
                   <motion.div
                     className="text-3xl"
@@ -562,19 +630,24 @@ const ProductsPage = () => {
                     {feature.icon}
                   </motion.div>
                   <div>
-                    <h3 className="text-xl font-bold text-gray-800 mb-2">{feature.title}</h3>
+                    <h3 className="text-xl font-bold text-gray-800 mb-2">
+                      {feature.title}
+                    </h3>
                     <p className="text-gray-600">{feature.desc}</p>
                   </div>
                 </motion.div>
               ))}
 
-              <motion.button 
+              <motion.button
                 className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-4 px-10 rounded-full transition-all duration-300 shadow-xl text-lg mt-8"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.8 }}
                 viewport={{ once: true }}
-                whileHover={{ scale: 1.1, boxShadow: "0 15px 40px rgba(147, 51, 234, 0.4)" }}
+                whileHover={{
+                  scale: 1.1,
+                  boxShadow: "0 15px 40px rgba(147, 51, 234, 0.4)",
+                }}
                 whileTap={{ scale: 0.95 }}
               >
                 DISCOVER NETWORK
@@ -592,36 +665,36 @@ const ProductsPage = () => {
               </div>
 
               {[
-                { 
-                  title: "Mesh Network Technology", 
+                {
+                  title: "Mesh Network Technology",
                   desc: "Self-healing network that adapts to changing conditions",
-                  icon: "🌐"
+                  icon: "🌐",
                 },
-                { 
-                  title: "Ultra-Low Power", 
+                {
+                  title: "Ultra-Low Power",
                   desc: "10-year battery life with intelligent power management",
-                  icon: "🔋"
+                  icon: "🔋",
                 },
-                { 
-                  title: "Weather Resistant", 
+                {
+                  title: "Weather Resistant",
                   desc: "IP67 rated for outdoor and indoor installations",
-                  icon: "🌦️"
+                  icon: "🌦️",
                 },
-                { 
-                  title: "Real-time Data", 
+                {
+                  title: "Real-time Data",
                   desc: "Instant sensor readings with millisecond precision",
-                  icon: "⚡"
-                }
+                  icon: "⚡",
+                },
               ].map((feature, index) => (
                 <div
                   key={index}
                   className="flex items-start space-x-4 bg-white/80 backdrop-blur-sm p-6 rounded-2xl shadow-lg border border-purple-100"
                 >
-                  <div className="text-3xl">
-                    {feature.icon}
-                  </div>
+                  <div className="text-3xl">{feature.icon}</div>
                   <div>
-                    <h3 className="text-xl font-bold text-gray-800 mb-2">{feature.title}</h3>
+                    <h3 className="text-xl font-bold text-gray-800 mb-2">
+                      {feature.title}
+                    </h3>
                     <p className="text-gray-600">{feature.desc}</p>
                   </div>
                 </div>
@@ -635,14 +708,14 @@ const ProductsPage = () => {
 
           {/* Right - Product Image */}
           {isClient ? (
-            <motion.div 
+            <motion.div
               className="flex justify-center"
               initial={{ opacity: 0, x: 100, scale: 0.8 }}
               whileInView={{ opacity: 1, x: 0, scale: 1 }}
               transition={{ duration: 1.2, delay: 0.3 }}
               viewport={{ once: true }}
             >
-              <motion.div 
+              <motion.div
                 className="relative w-96 h-96"
                 whileHover={{ scale: 1.1, rotate: 5 }}
                 transition={{ duration: 0.4 }}
@@ -650,7 +723,7 @@ const ProductsPage = () => {
                   rotateX: [0, 5, 0, -5, 0],
                 }}
                 style={{
-                  transformStyle: "preserve-3d"
+                  transformStyle: "preserve-3d",
                 }}
               >
                 <motion.div
