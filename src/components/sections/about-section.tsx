@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 const milestones = [
   {
@@ -109,10 +110,13 @@ export function AboutSection() {
                   transition={{ duration: 0.8, delay: index * 0.3 }}
                   viewport={{ once: true }}
                 >
-                  <img
+                  <Image
                     src={milestone.image}
                     alt={milestone.alt}
                     className="w-full h-48 object-cover rounded-2xl shadow-lg border border-gray-100"
+                    width={400}
+                    height={400}
+                    loading="eager"
                   />
                   <motion.div
                     className="absolute inset-0 bg-gradient-to-br from-blue-600/20 to-purple-600/20 rounded-2xl"
