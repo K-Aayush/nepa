@@ -39,7 +39,7 @@ interface ContactSectionProps {
   onVisitWebsite: () => void;
 }
 
-export function ContactSection({ onVisitWebsite }: ContactSectionProps) {
+export function PatnerSection({ onVisitWebsite }: ContactSectionProps) {
   return (
     <section className="min-h-screen py-8 md:py-16 flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-white to-gray-50 px-8">
       <div className="max-w-5xl mx-auto text-center px-8 relative z-10">
