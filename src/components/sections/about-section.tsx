@@ -1,106 +1,132 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 
-const features = [
+const milestones = [
   {
-    icon: "🤖",
-    title: "IoT Development",
+    year: "2018",
+    title: "Founded in Kupondole",
     description:
-      "Advanced Internet of Things solutions with Arduino, ESP32, and ESP8266 for smart automation systems",
+      "NepaTronix was established in Kupondole, Lalitpur, Nepal, with a vision to innovate in IoT and web/app development.",
+    image: "/nepatronixabout.jpeg",
+    alt: "NepaTronix founding team in Kupondole",
   },
   {
-    icon: "⚙️",
-    title: "Automation & Instrumentation",
+    year: "2020",
+    title: "First IoT Product Launch",
     description:
-      "High-performance automation systems and precision instrumentation for industrial applications",
+      "Launched our first smart IoT device, gaining traction in local and global markets.",
+    image: "/iotandroboticsabout.jpeg",
+    alt: "NepaTronix first IoT device",
   },
   {
-    icon: "🎓",
-    title: "STEAM Education",
+    year: "2021",
+    title: "Launched Tutoring Program",
     description:
-      "Comprehensive IoT and Robotics education programs for students from Class 5 to 10",
+      "Introduced comprehensive tutoring services to teach IoT and web/app development, empowering the next generation of tech innovators.",
+    image: "/schoolabout.jpeg",
+    alt: "NepaTronix tutoring session",
   },
   {
-    icon: "🔬",
-    title: "Research & Innovation",
+    year: "2023",
+    title: "Global Recognition",
     description:
-      "Cutting-edge research in AI, ML, and robotics to solve real-world challenges",
+      "Recognized as a fast-growing tech leader, delivering solutions worldwide.",
+    image: "/award.jpg",
+    alt: "NepaTronix receiving global recognition",
+  },
+  {
+    year: "2025",
+    title: "Expanded Web/App Expertise",
+    description:
+      "Built a dedicated team for high-performance web and mobile app development.",
+    image: "/teamabout.jpeg",
+    alt: "NepaTronix web and app development team",
   },
 ];
 
 export function AboutSection() {
   return (
-    <section className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-gray-50 to-white px-8">
-      <div className="max-w-4xl mx-auto text-center px-8 relative z-10">
+    <section className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-gray-50 to-white px-8 py-16">
+      <div className="max-w-5xl mx-auto px-8 relative z-10">
         <motion.h2
-          className="text-5xl md:text-6xl font-black mb-8 bg-gradient-to-r from-blue-700 via-cyan-500 to-purple-600 bg-clip-text text-transparent drop-shadow-lg"
+          className="text-5xl md:text-6xl font-black mb-8 text-center bg-gradient-to-r from-blue-700 via-cyan-500 to-purple-600 bg-clip-text text-transparent drop-shadow-lg"
           initial={{ opacity: 0, scale: 0.8, y: -40 }}
           whileInView={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 1.2, ease: [0.4, 0, 0.2, 1] }}
           viewport={{ once: true }}
         >
-          OUR SERVICES
+          ABOUT NEPATRONIX
         </motion.h2>
-
         <motion.p
-          className="text-lg md:text-xl mb-10 text-gray-700 max-w-3xl mx-auto leading-relaxed"
+          className="text-lg md:text-xl mb-12 text-gray-700 leading-relaxed text-center max-w-3xl mx-auto"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.3 }}
+          transition={{ duration: 1, delay: 0.5 }}
           viewport={{ once: true }}
         >
-          NepaTronix is a growing organization that positions itself as an IoT
-          developer of high-end devices and automation systems. We specialize in
-          instrumentation, capturing the growing demand for cutting-edge
-          technology products and services.
+          NepaTronix, based in Kupondole, Lalitpur, Nepal, is a fast-growing
+          technology company specializing in IoT and web/app development. We are
+          passionate about creating innovative solutions that empower businesses
+          and communities, blending cutting-edge technology with local
+          expertise.
         </motion.p>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {features.map((feature, index) => (
+        {/* Timeline Section */}
+        <div className="relative">
+          <div className="absolute top-0 bottom-0 left-1/2 w-1 bg-gradient-to-b from-blue-200 to-purple-200" />
+          {milestones.map((milestone, index) => (
             <motion.div
-              key={feature.title}
-              className="bg-white/80 backdrop-blur-sm p-8 rounded-3xl border border-gray-100 shadow-lg hover:shadow-2xl transition-all duration-500 relative overflow-hidden flex flex-col items-center"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              key={milestone.year}
+              className={`mb-12 flex ${
+                index % 2 === 0 ? "flex-row" : "flex-row-reverse"
+              } items-start relative`}
+              initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: index * 0.2 }}
               viewport={{ once: true }}
-              whileHover={{
-                y: -15,
-                scale: 1.05,
-                boxShadow: "0 25px 60px rgba(59, 130, 246, 0.15)",
-                borderColor: "#38bdf8",
-              }}
             >
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-br from-blue-600/10 to-purple-600/10 opacity-0"
-                whileHover={{ opacity: 1 }}
-                transition={{ duration: 0.3 }}
-              />
-
-              <motion.div
-                className="text-6xl mb-6"
-                animate={{
-                  y: [0, -10, 0],
-                  rotate: [0, 5, -5, 0],
-                }}
-                transition={{
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: index * 0.5,
-                }}
+              <div
+                className={`w-1/2 ${
+                  index % 2 === 0 ? "pr-8 text-right" : "pl-8 text-left"
+                }`}
               >
-                {feature.icon}
-              </motion.div>
-
-              <h3 className="text-2xl font-bold mb-3 text-gray-900">
-                {feature.title}
-              </h3>
-
-              <p className="text-gray-600 leading-relaxed text-base text-center">
-                {feature.description}
-              </p>
+                <span className="text-2xl font-bold text-blue-600">
+                  {milestone.year}
+                </span>
+                <h3 className="text-xl font-bold text-gray-900 mb-2">
+                  {milestone.title}
+                </h3>
+                <p className="text-gray-600 leading-relaxed">
+                  {milestone.description}
+                </p>
+              </div>
+              <div className="w-1/2 px-8">
+                <motion.div
+                  className="relative"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.8, delay: index * 0.3 }}
+                  viewport={{ once: true }}
+                >
+                  <Image
+                    src={milestone.image}
+                    alt={milestone.alt}
+                    className="w-full h-48 object-cover rounded-2xl shadow-lg border border-gray-100"
+                    width={400}
+                    height={400}
+                    loading="eager"
+                  />
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-br from-blue-600/20 to-purple-600/20 rounded-2xl"
+                    initial={{ opacity: 0 }}
+                    whileHover={{ opacity: 1 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                </motion.div>
+              </div>
+              <div className="absolute top-2 left-1/2 -ml-2 w-4 h-4 bg-blue-600 rounded-full" />
             </motion.div>
           ))}
         </div>

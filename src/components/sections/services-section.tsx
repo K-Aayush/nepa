@@ -2,49 +2,37 @@
 
 import { motion } from "framer-motion";
 
-const services = [
+const features = [
   {
-    icon: "🏫",
-    title: "School IoT Programs",
+    icon: "🤖",
+    title: "IoT Development",
     description:
-      "Year-long IoT and Robotics programs for educational institutions, fostering hands-on learning and innovation",
+      "Advanced Internet of Things solutions with Arduino, ESP32, and ESP8266 for smart automation systems",
   },
   {
-    icon: "🏭",
-    title: "Industrial Automation",
+    icon: "⚙️",
+    title: "Automation & Instrumentation",
     description:
-      "Smart factory solutions, sensor networks, and automated control systems for industrial applications",
+      "High-performance automation systems and precision instrumentation for industrial applications",
   },
   {
-    icon: "📱",
-    title: "Mobile App Integration",
+    icon: "🎓",
+    title: "STEAM Education",
     description:
-      "IoT mobile applications with ESP32 and Blynk platform for remote monitoring and control",
+      "Comprehensive IoT and Robotics education programs for students from Class 5 to 10",
   },
   {
-    icon: "🛡️",
-    title: "Smart Security Systems",
+    icon: "🔬",
+    title: "Research & Innovation",
     description:
-      "Advanced fire detection, ultrasonic radar systems, and LoRa long-range alert systems",
-  },
-  {
-    icon: "🌐",
-    title: "Hardware & Software Development",
-    description:
-      "Custom IoT device development with both hardware design and software programming",
-  },
-  {
-    icon: "📚",
-    title: "Technical Training",
-    description:
-      "Workshops, courses, and certification programs in Arduino, ESP32, robotics, and automation",
+      "Cutting-edge research in AI, ML, and robotics to solve real-world challenges",
   },
 ];
 
-export function ServicesSection() {
+export function ServiceSection() {
   return (
-    <section className="min-h-screen  flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-white to-gray-50 px-8">
-      <div className="max-w-5xl mx-auto text-center px-8 relative z-10">
+    <section className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-gray-50 to-white px-8">
+      <div className="max-w-4xl mx-auto text-center px-8 relative z-10">
         <motion.h2
           className="text-5xl md:text-6xl font-black mb-8 bg-gradient-to-r from-blue-700 via-cyan-500 to-purple-600 bg-clip-text text-transparent drop-shadow-lg"
           initial={{ opacity: 0, scale: 0.8, y: -40 }}
@@ -52,7 +40,7 @@ export function ServicesSection() {
           transition={{ duration: 1.2, ease: [0.4, 0, 0.2, 1] }}
           viewport={{ once: true }}
         >
-          OUR PRODUCTS
+          OUR SERVICES
         </motion.h2>
 
         <motion.p
@@ -62,74 +50,73 @@ export function ServicesSection() {
           transition={{ duration: 1, delay: 0.3 }}
           viewport={{ once: true }}
         >
-          Comprehensive IoT and Robotics solutions designed for education,
-          industry, and innovation
+          NepaTronix is a growing organization that positions itself as an IoT
+          developer of high-end devices and automation systems. We specialize in
+          instrumentation, capturing the growing demand for cutting-edge
+          technology products and services.
         </motion.p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services.map((service, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {features.map((feature, index) => (
             <motion.div
-              key={service.title}
-              className="bg-white/90 backdrop-blur-sm p-6 rounded-2xl border border-gray-100 shadow-lg hover:shadow-2xl transition-all duration-500 relative overflow-hidden group"
+              key={feature.title}
+              className="bg-white/80 backdrop-blur-sm p-8 rounded-3xl border border-gray-100 shadow-lg hover:shadow-2xl transition-all duration-500 relative overflow-hidden flex flex-col items-center"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: index * 0.15 }}
+              transition={{ duration: 0.8, delay: index * 0.2 }}
               viewport={{ once: true }}
               whileHover={{
-                y: -20,
-                scale: 1.03,
-                boxShadow: "0 30px 70px rgba(0, 0, 0, 0.15)",
+                y: -15,
+                scale: 1.05,
+                boxShadow: "0 25px 60px rgba(59, 130, 246, 0.15)",
+                borderColor: "#38bdf8",
               }}
             >
-              {/* Gradient overlay on hover */}
               <motion.div
-                className="absolute inset-0 bg-gradient-to-br from-blue-600/5 to-purple-600/5 rounded-2xl opacity-0"
+                className="absolute inset-0 bg-gradient-to-br from-blue-600/10 to-purple-600/10 opacity-0"
                 whileHover={{ opacity: 1 }}
-                transition={{ duration: 0.4 }}
-              />
-
-              {/* Top border animation */}
-              <motion.div
-                className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-t-2xl scale-x-0 origin-left"
-                whileHover={{ scaleX: 1 }}
-                transition={{ duration: 0.5 }}
-              />
-
-              <motion.div
-                className="text-4xl mb-4 relative z-10"
-                whileHover={{
-                  scale: 1.2,
-                  rotate: 8,
-                  y: -5,
-                }}
                 transition={{ duration: 0.3 }}
+              />
+
+              <motion.div
+                className="text-6xl mb-6"
+                animate={{
+                  y: [0, -10, 0],
+                  rotate: [0, 5, -5, 0],
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: index * 0.5,
+                }}
               >
-                {service.icon}
+                {feature.icon}
               </motion.div>
 
-              <h3 className="text-lg font-bold mb-3 text-gray-900 relative z-10">
-                {service.title}
+              <h3 className="text-2xl font-bold mb-3 text-gray-900">
+                {feature.title}
               </h3>
 
-              <p className="text-gray-600 leading-relaxed relative z-10 text-sm">
-                {service.description}
+              <p className="text-gray-600 leading-relaxed text-base text-center">
+                {feature.description}
               </p>
             </motion.div>
           ))}
         </div>
       </div>
 
-      {/* Background decoration */}
+      {/* Background Elements */}
       <motion.div
-        className="absolute top-1/2 left-1/4 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-br from-cyan-400/5 to-blue-400/5 rounded-full blur-3xl"
+        className="absolute top-20 right-20 w-48 h-48 bg-gradient-to-br from-blue-400/10 to-purple-400/10 rounded-full blur-3xl"
         animate={{
-          scale: [1, 1.2, 1],
-          opacity: [0.3, 0.6, 0.3],
+          scale: [1, 1.3, 1],
+          rotate: [0, 90, 180],
         }}
         transition={{
-          duration: 8,
+          duration: 25,
           repeat: Infinity,
-          ease: "easeInOut",
+          ease: "linear",
         }}
       />
     </section>
