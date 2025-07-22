@@ -31,8 +31,8 @@ const features = [
 
 export function ServiceSection() {
   return (
-    <section className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-gray-50 to-white px-8">
-      <div className="max-w-4xl mx-auto text-center px-8 relative z-10">
+    <section className="min-h-screen py-8 md:py-16 flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-gray-50 to-white px-8">
+      <div className="max-w-5xl  mx-auto text-center px-8 relative z-10">
         <motion.h2
           className="text-5xl md:text-6xl font-black mb-8 bg-gradient-to-r from-blue-700 via-cyan-500 to-purple-600 bg-clip-text text-transparent drop-shadow-lg"
           initial={{ opacity: 0, scale: 0.8, y: -40 }}

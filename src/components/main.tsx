@@ -11,7 +11,7 @@ import { HomeSection } from "@/components/sections/home-section";
 import { AboutSection } from "@/components/sections/about-section";
 import { ServiceSection } from "@/components/sections/services-section";
 import { ProjectsSection } from "@/components/sections/projects-section";
-import { ContactSection } from "@/components/sections/contact-section";
+import { PatnerSection } from "@/components/sections/patner-section";
 import { ProductsSection } from "./sections/products-section";
 import { ProgressIndicator } from "./progress-indicator";
 
@@ -247,8 +247,8 @@ export default function Main() {
         </section>
 
         {/* Contact Section */}
-        <section id="contact" className="min-h-screen">
-          <ContactSection onVisitWebsite={handleVisitWebsite} />
+        <section id="patner" className="min-h-screen">
+          <PatnerSection onVisitWebsite={handleVisitWebsite} />
         </section>
       </main>
     </div>
