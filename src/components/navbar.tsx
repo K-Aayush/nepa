@@ -16,6 +16,7 @@ export function Navbar({ activeSection }: NavbarProps) {
     { name: "TEAMS", id: "teams" },
     { name: "BLOGS", id: "blogs" },
     { name: "GALLERY", id: "gallery" },
+    { name: "PATNER", id: "patner" },
     { name: "CONTACT", id: "contact" },
   ];
 
