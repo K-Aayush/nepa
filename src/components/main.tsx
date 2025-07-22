@@ -9,11 +9,10 @@ import { RobotGuide } from "@/components/robot-guide";
 import { Chatbot } from "@/components/chatbot";
 import { HomeSection } from "@/components/sections/home-section";
 import { AboutSection } from "@/components/sections/about-section";
-import { ServicesSection } from "@/components/sections/services-section";
+import { ServiceSection } from "@/components/sections/services-section";
 import { ProjectsSection } from "@/components/sections/projects-section";
 import { ContactSection } from "@/components/sections/contact-section";
-import { Footer } from "@/components/footer";
-import { Navbar } from "./navbar";
+import { ProductsSection } from "./sections/products-section";
 import { ProgressIndicator } from "./progress-indicator";
 
 const sections = [
@@ -235,12 +234,16 @@ export default function Main() {
 
         {/* Services Section */}
         <section id="services" className="min-h-screen">
-          <ServicesSection />
+          <ServiceSection />
         </section>
 
         {/* Projects Section */}
         <section id="projects" className="min-h-screen">
           <ProjectsSection />
+        </section>
+
+        <section id="products" className="min-h-screen">
+          <ProductsSection />
         </section>
 
         {/* Contact Section */}
