@@ -11,7 +11,7 @@ import { HomeSection } from "@/components/sections/home-section";
 import { AboutSection } from "@/components/sections/about-section";
 import { ServiceSection } from "@/components/sections/services-section";
 import { ProjectsSection } from "@/components/sections/projects-section";
-import { ContactSection } from "@/components/sections/contact-section";
+import { ContactSection } from "@/components/sections/patner-section";
 import { ProductsSection } from "./sections/products-section";
 import { ProgressIndicator } from "./progress-indicator";
 
