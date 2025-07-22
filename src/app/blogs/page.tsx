@@ -1,8 +1,8 @@
-import { BlogSection } from "@/components/sections/blog";
+import BlogsPage from "@/components/pages/blogs-page";
 import React from "react";
 
 const page = () => {
-  return <BlogSection />;
+  return <BlogsPage />;
 };
 
 export default page;

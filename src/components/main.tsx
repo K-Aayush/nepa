@@ -146,9 +146,6 @@ export default function Main() {
       {/* Custom Cursor */}
       <CustomCursor />
 
-      {/* Navigation */}
-      <Navbar onNavigate={navigateToSection} activeSection={""} />
-
       {/* Progress Indicator */}
       <ProgressIndicator
         currentSection={currentSection}
@@ -250,7 +247,6 @@ export default function Main() {
         <section id="contact" className="min-h-screen">
           <ContactSection onVisitWebsite={handleVisitWebsite} />
         </section>
-        <Footer />
       </main>
     </div>
   );

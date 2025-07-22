@@ -1,21 +1,18 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
+import Link from "next/link";
 
 interface NavbarProps {
-  onNavigate: (section: string) => void;
   activeSection: string;
 }
 
-export function Navbar({ onNavigate, activeSection }: NavbarProps) {
-  const { scrollY } = useScroll();
-  const padding = useTransform(scrollY, [0, 100], ["25px 60px", "20px 60px"]);
-
+export function Navbar({ activeSection }: NavbarProps) {
   const navItems = [
-    { name: "HOME", id: "home" },
-    { name: "COLLABORATION", id: "about" },
+    { name: "HOME", id: "" },
+    { name: "COLLABORATION", id: "collaboration" },
     { name: "SERVICES", id: "services" },
-    { name: "PRODUCTS", id: "projects" },
+    { name: "PRODUCTS", id: "products" },
     { name: "TEAMS", id: "teams" },
     { name: "BLOGS", id: "blogs" },
     { name: "GALLERY", id: "gallery" },
@@ -25,7 +22,7 @@ export function Navbar({ onNavigate, activeSection }: NavbarProps) {
   return (
     <motion.nav
       className="fixed top-0 w-full flex justify-center items-center z-10"
-      style={{ backgroundColor: "transparent", padding }}
+      style={{ backgroundColor: "transparent", padding: "20px 60px" }}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 1.2, ease: [0.4, 0, 0.2, 1] }}
@@ -36,9 +33,9 @@ export function Navbar({ onNavigate, activeSection }: NavbarProps) {
           <img src="/logo.png" alt="Logo" className="h-8 w-35" />
         </div>
         {navItems.map((item) => (
-          <button
+          <Link
             key={item.id}
-            onClick={() => onNavigate(item.id)}
+            href={`/${item.id}`}
             className={`relative flex items-center px-5 py-2 font-semibold transition-colors duration-200 rounded-full
               ${
                 activeSection === item.id
@@ -48,11 +45,9 @@ export function Navbar({ onNavigate, activeSection }: NavbarProps) {
           >
             <span>{item.name}</span>
             {activeSection === item.id && (
-              <span className="ml-2 flex items-center justify-center w-6 h-6 rounded-full bg-black text-green-200 font-bold text-sm">
-                4
-              </span>
+              <span className=" text-green-200 font-bold text-sm"></span>
             )}
-          </button>
+          </Link>
         ))}
       </div>
     </motion.nav>

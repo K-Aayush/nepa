@@ -1,8 +1,8 @@
-import { ServicesSection } from "@/components/sections/services-section";
+import ServiceSPage from "@/components/pages/services-page";
 import React from "react";
 
 const page = () => {
-  return <ServicesSection />;
+  return <ServiceSPage />;
 };
 
 export default page;
