@@ -249,8 +249,8 @@ export default function Main() {
         {/* Contact Section */}
         <section id="contact" className="min-h-screen">
           <ContactSection onVisitWebsite={handleVisitWebsite} />
-          <Footer />
         </section>
+        <Footer />
       </main>
     </div>
   );
