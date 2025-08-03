@@ -531,7 +531,7 @@ const ProductsPage = () => {
       </section>
 
       {/* Third Section - Features Left, Image Right */}
-      <section className="bg-gradient-to-br py-8 md:py-16 from-purple-50 to-indigo-100 min-h-screen flex items-center justify-center px-4 md:px-8 relative overflow-hidden">
+      <section className="bg-gradient-to-br py-8 from-purple-50 to-indigo-100 min-h-screen flex items-center justify-center px-4 md:px-8 relative overflow-hidden">
         {/* Animated background elements */}
         {isClient && (
           <>
