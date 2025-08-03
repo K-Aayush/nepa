@@ -423,7 +423,7 @@ export default function ContactPage() {
               <h3 className="text-2xl font-bold mb-6">Office Hours</h3>
               <div className="space-y-3">
                 <div className="flex justify-between">
-                  <span>Monday - Friday</span>
+                  <span>Sunday - Friday</span>
                   <span className="font-semibold">9:00 AM - 6:00 PM</span>
                 </div>
                 <div className="flex justify-between">
