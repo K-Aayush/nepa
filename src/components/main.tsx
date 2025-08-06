@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 
 import { AnimatedBackground } from "@/components/animated-background";
 import { CustomCursor } from "@/components/custom-cursor";
-import { RobotGuide } from "@/components/robot-guide";
 import { Chatbot } from "@/components/chatbot";
 import { HomeSection } from "@/components/sections/home-section";
 import { AboutSection } from "@/components/sections/about-section";
@@ -14,6 +13,7 @@ import { ProjectsSection } from "@/components/sections/projects-section";
 import { PatnerSection } from "@/components/sections/patner-section";
 import { ProductsSection } from "./sections/products-section";
 import { ProgressIndicator } from "./progress-indicator";
+import { RobotGuide } from "./robot-guide";
 
 const sections = [
   "welcome",
@@ -30,7 +30,6 @@ const sections = [
 export default function Main() {
   const [currentSection, setCurrentSection] = useState("welcome");
   const [isLoading, setIsLoading] = useState(true);
-  const [robotSpeechEnabled, setRobotSpeechEnabled] = useState(true);
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoading(false), 2000);
@@ -45,12 +44,6 @@ export default function Main() {
     if (element) {
       element.scrollIntoView({ behavior: "smooth", block: "center" });
     }
-  };
-
-  const handleRobotClick = () => {
-    const currentIndex = sections.indexOf(currentSection);
-    const nextIndex = (currentIndex + 1) % sections.length;
-    navigateToSection(sections[nextIndex]);
   };
 
   // Intersection Observer for section detection
@@ -83,9 +76,7 @@ export default function Main() {
     window.open("https://www.nepatronix.org", "_blank");
   };
 
-  const toggleRobotSpeech = () => {
-    setRobotSpeechEnabled(!robotSpeechEnabled);
-  };
+
 
   // Loading Screen
   if (isLoading) {
@@ -154,27 +145,9 @@ export default function Main() {
       {/* Robot Guide */}
       <RobotGuide
         currentSection={currentSection}
-        onRobotClick={handleRobotClick}
+        onNavigate={navigateToSection}
         isVisible={true}
-        speechEnabled={robotSpeechEnabled}
       />
-
-      {/* Robot Controls */}
-      <div className="fixed bottom-12 right-12 z-[1000]">
-        <motion.button
-          onClick={toggleRobotSpeech}
-          className={`w-16 h-16 rounded-full border-2 transition-all duration-300 flex items-center justify-center text-2xl ${
-            robotSpeechEnabled
-              ? "bg-gradient-to-br from-blue-600 to-purple-600 text-white border-blue-400"
-              : "bg-white/80 text-gray-600 border-gray-300"
-          }`}
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          title="Toggle Robot Speech"
-        >
-          💬
-        </motion.button>
-      </div>
 
       {/* Chatbot */}
       <Chatbot />
