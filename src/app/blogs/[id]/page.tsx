@@ -1,14 +1,9 @@
 import BlogDetailPage from "@/components/pages/blog-detail-page";
 import React from "react";
 
-interface BlogPageProps {
-  params: {
-    id: string;
-  };
-}
-
-const page = ({ params }: BlogPageProps) => {
-  return <BlogDetailPage blogId={params.id} />;
+const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
+  const { id } = await params;
+  return <BlogDetailPage blogId={id} />;
 };
 
-export default page;
+export default Page;

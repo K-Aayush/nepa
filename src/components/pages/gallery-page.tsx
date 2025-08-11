@@ -127,9 +127,6 @@ const GalleryPage = () => {
                     <p className="text-sm font-medium line-clamp-2">
                       {item.description}
                     </p>
-                    <p className="text-xs text-gray-300 mt-1">
-                      {new Date(item.createdAt).toLocaleDateString()}
-                    </p>
                   </div>
                 </div>
               </motion.div>
