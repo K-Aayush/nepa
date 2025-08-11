@@ -101,5 +101,20 @@ export const getImageUrl = (imagePath: string): string => {
   if (imagePath.startsWith("http")) {
     return imagePath;
   }
-  return `${API_BASE_URL.replace("/api/v1", "/uploads")}${imagePath}`;
+
+  // Handle different image path formats
+  let cleanPath = imagePath;
+
+  // If the path doesn't start with a folder name, assume it's in the root uploads
+  if (!cleanPath.includes("/")) {
+    cleanPath = `gallery/${cleanPath}`;
+  }
+
+  // Remove leading slash if present
+  if (cleanPath.startsWith("/")) {
+    cleanPath = cleanPath.slice(1);
+  }
+
+  const baseUrl = API_BASE_URL.replace("/api/v1", "");
+  return `${baseUrl}/uploads/${cleanPath}`;
 };
