@@ -105,11 +105,11 @@ const BlogDetailPage = ({ blogId }: BlogDetailPageProps) => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white">
       {/* Header with back button */}
-      <div className="top-0 z-50 pt-24">
+      <div className="top-0 z-50 py-3 bg-white/80 backdrop-blur-lg border-b border-gray-200">
         <div className="max-w-4xl mx-auto px-4 py-4">
           <button
             onClick={() => router.push("/blogs")}
-            className="flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors"
+            className="flex items-center gap-2 cursor-pointer text-gray-600 hover:text-blue-600 transition-colors"
           >
             <ArrowLeft size={20} />
             Back to Blogs
