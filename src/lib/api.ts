@@ -101,5 +101,5 @@ export const getImageUrl = (imagePath: string): string => {
   if (imagePath.startsWith("http")) {
     return imagePath;
   }
-  return `${API_BASE_URL.replace("/api", "")}${imagePath}`;
+  return `${API_BASE_URL.replace("/api/v1", "/uploads")}${imagePath}`;
 };
