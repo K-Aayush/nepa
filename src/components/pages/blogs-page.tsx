@@ -23,7 +23,11 @@ const BlogsPage = () => {
       if (pageNum === 0) {
         setBlogs(newBlogs);
       } else {
-        setBlogs((prev) => [...prev, ...newBlogs]);
+        setBlogs((prev) => {
+          const existingIds = new Set(prev.map((b) => b._id));
+          const uniqueNew = newBlogs.filter((b) => !existingIds.has(b._id));
+          return [...prev, ...uniqueNew];
+        });
       }
 
       setHasMore(newBlogs.length === 12);
@@ -46,7 +50,6 @@ const BlogsPage = () => {
     try {
       // Increment view count by fetching the blog
       await blogAPI.getBlogById(blog._id);
-      // You can navigate to blog detail page here if needed
       console.log("Blog clicked:", blog.title);
     } catch (err) {
       console.error("Error viewing blog:", err);
@@ -116,7 +119,7 @@ const BlogsPage = () => {
 
             return (
               <motion.div
-                key={blog._id}
+                key={`${blog._id}-${index}`}
                 className="flex flex-col h-full bg-white rounded-2xl border border-gray-200 shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden group relative"
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
