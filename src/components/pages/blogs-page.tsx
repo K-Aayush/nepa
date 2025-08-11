@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { blogAPI, Blog, getImageUrl } from "@/lib/api";
 
 const BlogsPage = () => {
@@ -10,6 +11,7 @@ const BlogsPage = () => {
   const [error, setError] = useState<string | null>(null);
   const [page, setPage] = useState(0);
   const [hasMore, setHasMore] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
     fetchBlogs();
@@ -50,9 +52,12 @@ const BlogsPage = () => {
     try {
       // Increment view count by fetching the blog
       await blogAPI.getBlogById(blog._id);
-      console.log("Blog clicked:", blog.title);
+      // Navigate to the blog detail page
+      router.push(`/blogs/${blog._id}`);
     } catch (err) {
       console.error("Error viewing blog:", err);
+      // Still navigate even if view increment fails
+      router.push(`/blogs/${blog._id}`);
     }
   };
 
@@ -161,7 +166,7 @@ const BlogsPage = () => {
                       handleBlogClick(blog);
                     }}
                   >
-                    READ ARTICLE
+                    READ MORE
                   </button>
                 </div>
               </motion.div>
