@@ -24,7 +24,11 @@ const GalleryPage = () => {
       if (pageNum === 0) {
         setGalleryItems(newItems);
       } else {
-        setGalleryItems((prev) => [...prev, ...newItems]);
+        setGalleryItems((prev) => {
+          const existingIds = new Set(prev.map((g) => g._id));
+          const uniqueNew = newItems.filter((g) => !existingIds.has(g._id));
+          return [...prev, ...uniqueNew];
+        });
       }
 
       setHasMore(newItems.length === 12);
@@ -99,7 +103,7 @@ const GalleryPage = () => {
           <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-12">
             {galleryItems.map((item, index) => (
               <motion.div
-                key={item._id}
+                key={`${item._id}-${index}`}
                 className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer"
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -115,7 +119,7 @@ const GalleryPage = () => {
                     className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                     onError={(e) => {
                       const target = e.target as HTMLImageElement;
-                      target.src = "/robot.svg"; // Fallback image
+                      target.src = "/robot.svg";
                     }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
