@@ -6,6 +6,7 @@ import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { RobotGuideWrapper } from "@/components/RobotGuideWrapper";
 
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -112,7 +113,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Navbar activeSection={""} />
+        <ConditionalNavbar />
         {children}
         <Footer />
         <RobotGuideWrapper />

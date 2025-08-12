@@ -1,48 +1,93 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
-
-const blogs = [
-  {
-    title: "AI in Robotics",
-    description:
-      "Exploring the integration of AI in modern robotics systems. This blog delves into the latest advancements, challenges, and future prospects of combining artificial intelligence with robotics to create smarter, more efficient machines.",
-    image: "/robot.svg",
-  },
-  {
-    title: "IoT Security Challenges",
-    description:
-      "Understanding security concerns in IoT devices and networks. Learn about vulnerabilities, best practices, and how to safeguard your connected devices from emerging threats in the rapidly evolving Internet of Things landscape.",
-    image: "/window.svg",
-  },
-  {
-    title: "Machine Learning Applications",
-    description:
-      "How ML is transforming industries and driving innovation. Discover real-world use cases, success stories, and the impact of machine learning on business processes, healthcare, and technology sectors.",
-    image: "/globe.svg",
-  },
-  {
-    title: "Sustainable Tech Solutions",
-    description:
-      "Developing eco-friendly IoT and robotics systems. Explore green technologies, energy-efficient designs, and sustainable practices that are shaping the future of technology for a better planet.",
-    image: "/next.svg",
-  },
-  {
-    title: "Future of Automation",
-    description:
-      "The role of automation in shaping the future of industries. Analyze trends, benefits, and the transformative power of automation in manufacturing, logistics, and beyond.",
-    image: "/vercel.svg",
-  },
-  {
-    title: "Smart Cities with IoT",
-    description:
-      "Leveraging IoT for smarter and more connected cities. Uncover how smart infrastructure, data analytics, and IoT devices are revolutionizing urban living and city management.",
-    image: "/file.svg",
-  },
-];
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { blogAPI, Blog, getImageUrl } from "@/lib/api";
 
 const BlogsPage = () => {
+  const [blogs, setBlogs] = useState<Blog[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [page, setPage] = useState(0);
+  const [hasMore, setHasMore] = useState(true);
+  const router = useRouter();
+
+  useEffect(() => {
+    fetchBlogs();
+  }, []);
+
+  const fetchBlogs = async (pageNum: number = 0) => {
+    try {
+      setLoading(true);
+      const newBlogs = await blogAPI.getBlogs(pageNum);
+
+      if (pageNum === 0) {
+        setBlogs(newBlogs);
+      } else {
+        setBlogs((prev) => {
+          const existingIds = new Set(prev.map((b) => b._id));
+          const uniqueNew = newBlogs.filter((b) => !existingIds.has(b._id));
+          return [...prev, ...uniqueNew];
+        });
+      }
+
+      setHasMore(newBlogs.length === 12);
+      setPage(pageNum);
+    } catch (err) {
+      setError("Failed to fetch blogs");
+      console.error("Error fetching blogs:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const loadMore = () => {
+    if (!loading && hasMore) {
+      fetchBlogs(page + 1);
+    }
+  };
+
+  const handleBlogClick = async (blog: Blog) => {
+    try {
+      // Increment view count by fetching the blog
+      await blogAPI.getBlogById(blog._id);
+      // Navigate to the blog detail page
+      router.push(`/blogs/${blog._id}`);
+    } catch (err) {
+      console.error("Error viewing blog:", err);
+      // Still navigate even if view increment fails
+      router.push(`/blogs/${blog._id}`);
+    }
+  };
+
+  if (loading && blogs.length === 0) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-lg text-gray-600">Loading blogs...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error && blogs.length === 0) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <p className="text-lg text-red-600 mb-4">{error}</p>
+          <button
+            onClick={() => fetchBlogs(0)}
+            className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+          >
+            Try Again
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <section className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden bg-gradient-to-br from-gray-50 to-white py-26 md:py-32 px-2 md:px-8">
       <div className="max-w-7xl mx-auto text-center px-2 md:px-8 relative z-10">
@@ -70,31 +115,33 @@ const BlogsPage = () => {
         {/* Blog Grid */}
         <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mb-12">
           {blogs.map((blog, index) => {
-            // Helper to trim description to 15 words
             const getShortDescription = (desc: string) => {
               const words = desc.split(" ");
               return (
                 words.slice(0, 15).join(" ") + (words.length > 15 ? "..." : "")
               );
             };
+
             return (
               <motion.div
-                key={blog.title}
+                key={`${blog._id}-${index}`}
                 className="flex flex-col h-full bg-white rounded-2xl border border-gray-200 shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden group relative"
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: index * 0.15 }}
                 viewport={{ once: true }}
+                onClick={() => handleBlogClick(blog)}
+                style={{ cursor: "pointer" }}
               >
                 <div className="relative w-full h-48 md:h-56 overflow-hidden">
-                  <Image
-                    src={blog.image}
+                  <img
+                    src={getImageUrl(blog.image)}
                     alt={blog.title}
-                    fill
-                    style={{ objectFit: "cover" }}
-                    className="transition-transform duration-300 group-hover:scale-105"
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                    priority={index < 2}
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.src = "/robot.svg";
+                    }}
                   />
                 </div>
                 <div className="flex flex-col flex-1 px-6 py-5">
@@ -104,14 +151,54 @@ const BlogsPage = () => {
                   <p className="text-gray-600 text-base mb-6 flex-1">
                     {getShortDescription(blog.description)}
                   </p>
-                  <button className="mt-auto inline-block bg-blue-700 text-white font-semibold px-5 py-2 rounded-lg shadow hover:bg-blue-800 transition-colors duration-200 text-sm tracking-wide">
-                    READ ARTICLE
+
+                  {/* Blog Stats */}
+                  <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
+                    <span>👁️ {blog.views} views</span>
+                    <span>❤️ {blog.likes} likes</span>
+                    <span>💬 {blog.comments} comments</span>
+                  </div>
+
+                  <button
+                    className="mt-auto inline-block bg-blue-700 text-white font-semibold px-5 py-2 rounded-lg shadow hover:bg-blue-800 transition-colors duration-200 text-sm tracking-wide"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleBlogClick(blog);
+                    }}
+                  >
+                    READ MORE
                   </button>
                 </div>
               </motion.div>
             );
           })}
         </div>
+
+        {/* Load More Button */}
+        {hasMore && (
+          <motion.div
+            className="text-center"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <button
+              onClick={loadMore}
+              disabled={loading}
+              className="px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {loading ? (
+                <div className="flex items-center gap-2">
+                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                  Loading...
+                </div>
+              ) : (
+                "Load More Blogs"
+              )}
+            </button>
+          </motion.div>
+        )}
       </div>
 
       {/* Background Elements */}
