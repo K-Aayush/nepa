@@ -5,23 +5,23 @@ import Image from "next/image";
 
 const milestones = [
   {
-    year: "2018",
-    title: "Founded in Kupondole",
+    year: "2020",
+    title: "Early Started in Research ",
     description:
       "NepaTronix was established in Kupondole, Lalitpur, Nepal, with a vision to innovate in IoT and web/app development.",
     image: "/nepatronixabout.jpeg",
     alt: "NepaTronix founding team in Kupondole",
   },
   {
-    year: "2019",
-    title: "First Community Workshop",
+    year: "2021",
+    title: "Got Completed Research Sanitary Pad vending ",
     description:
       "Hosted our inaugural IoT workshop at a local college, sparking interest in smart technology among students.",
     image: "/communityworkshopabout.jpg",
     alt: "NepaTronix IoT workshop in college",
   },
   {
-    year: "2020",
+    year: "2022",
     title: "First IoT Product Launch",
     description:
       "Launched our first smart IoT device, gaining traction in local and global markets.",
@@ -29,7 +29,7 @@ const milestones = [
     alt: "NepaTronix first IoT device",
   },
   {
-    year: "2021",
+    year: "2023",
     title: "Launched Tutoring Program",
     description:
       "Introduced comprehensive tutoring services to teach IoT and web/app development, empowering the next generation of tech innovators.",
@@ -37,7 +37,7 @@ const milestones = [
     alt: "NepaTronix tutoring session",
   },
   {
-    year: "2022",
+    year: "2024",
     title: "Tech Exhibition Showcase",
     description:
       "Showcased innovative IoT and app solutions at a national tech exhibition, earning industry recognition.",
@@ -45,29 +45,15 @@ const milestones = [
     alt: "NepaTronix at tech exhibition",
   },
   {
-    year: "2023",
+    year: "2025",
     title: "Global Recognition",
     description:
       "Recognized as a fast-growing tech leader, delivering solutions worldwide.",
     image: "/award.jpg",
     alt: "NepaTronix receiving global recognition",
   },
-  {
-    year: "2024",
-    title: "Regional College Workshops",
-    description:
-      "Expanded our workshop series to colleges across Nepal, promoting IoT and coding skills.",
-    image: "/collegeworkshop.jpg",
-    alt: "NepaTronix college workshop series",
-  },
-  {
-    year: "2025",
-    title: "Expanded Web/App Expertise",
-    description:
-      "Built a dedicated team for high-performance web and mobile app development.",
-    image: "/teamabout.jpeg",
-    alt: "NepaTronix web and app development team",
-  },
+  
+  
 ];
 
 export function AboutSection() {

@@ -371,14 +371,14 @@ export default function ContactPage() {
                   {
                     icon: Mail,
                     label: "Email",
-                    value: "info@nepatronix.com",
-                    href: "mailto:info@nepatronix.com",
+                    value: "support@nepatronix.com",
+                    href: "support@nepatronix.com",
                   },
                   {
                     icon: Phone,
                     label: "Phone",
-                    value: "+977 1 555 1234",
-                    href: "tel:+97715551234",
+                    value: "+977 9803661701",
+                    href: "tel:9803661701",
                   },
                   {
                     icon: MapPin,

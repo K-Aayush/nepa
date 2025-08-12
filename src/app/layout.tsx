@@ -5,6 +5,7 @@ import Head from "next/head";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { RobotGuideWrapper } from "@/components/RobotGuideWrapper";
+import { ConditionalNavbar } from "@/components/conditional-navbar";
 
 
 const geistSans = Geist({
