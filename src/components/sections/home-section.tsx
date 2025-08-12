@@ -16,10 +16,10 @@ interface StatData {
 export function HomeSection({ onNavigate }: HomeSectionProps) {
   const [stats, setStats] = useState<StatData[]>(
     [
-      { number: 0, label: "Happy Students", target: 67 },
-      { number: 0, label: "Completed Projects", target: 15 },
-      { number: 0, label: "Running Projects", target: 8 },
-      { number: 0, label: "School Partnerships", target: 5 },
+      { number: 0, label: "Happy Students", target: 25000 },
+      { number: 0, label: "Completed Projects", target: 50 },
+      { number: 0, label: "Running Projects", target: 13 },
+      { number: 0, label: "School Partnerships", target: 40 },
     ]
   );
 

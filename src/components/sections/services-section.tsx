@@ -21,11 +21,24 @@ const features = [
     description:
       "Comprehensive IoT and Robotics education programs for students from Class 5 to 10",
   },
+
   {
-    icon: "🔬",
-    title: "Research & Innovation",
+    icon: "🛠️",
+    title: "Prototyping & Product Design",
     description:
-      "Cutting-edge research in AI, ML, and robotics to solve real-world challenges",
+      "Rapid prototyping, custom electronics, and product design for startups and innovators.",
+  },
+  {
+    icon: "📦",
+    title: "Learning Kits & Tools",
+    description:
+      "Custom IoT and robotics kits, STEM/STEAM learning tools, and classroom innovation bundles.",
+  },
+  {
+    icon: "🛡️",
+    title: "Security & Compliance",
+    description:
+      "Robust cybersecurity, data privacy, and regulatory compliance solutions for IoT and automation systems.",
   },
 ];
 
@@ -106,19 +119,6 @@ export function ServiceSection() {
         </div>
       </div>
 
-      {/* Background Elements */}
-      <motion.div
-        className="absolute top-20 right-20 w-48 h-48 bg-gradient-to-br from-blue-400/10 to-purple-400/10 rounded-full blur-3xl"
-        animate={{
-          scale: [1, 1.3, 1],
-          rotate: [0, 90, 180],
-        }}
-        transition={{
-          duration: 25,
-          repeat: Infinity,
-          ease: "linear",
-        }}
-      />
     </section>
   );
 }

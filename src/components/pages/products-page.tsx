@@ -162,15 +162,7 @@ const ProductsPage = () => {
                     {/* Badge */}
                     <div className="absolute top-6 left-6">
                       <span
-                        className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold shadow-lg ${
-                          product.badge === "Best Seller"
-                            ? "bg-gradient-to-r from-orange-500 to-red-500 text-white"
-                            : product.badge === "Educational Choice"
-                            ? "bg-gradient-to-r from-green-500 to-emerald-500 text-white"
-                            : product.badge === "Enterprise"
-                            ? "bg-gradient-to-r from-purple-500 to-indigo-500 text-white"
-                            : "bg-gradient-to-r from-blue-500 to-cyan-500 text-white"
-                        }`}
+                        className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold shadow-lg bg-gradient-to-r from-blue-500 to-cyan-500 text-white"
                       >
                         <FaStar className="w-3 h-3" />
                         {product.badge}
@@ -210,15 +202,7 @@ const ProductsPage = () => {
                       whileInView={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.6, delay: 0.3 }}
                       viewport={{ once: true }}
-                      className={`text-lg font-medium mb-6 ${
-                        index % 4 === 0
-                          ? "text-blue-600"
-                          : index % 4 === 1
-                          ? "text-green-600"
-                          : index % 4 === 2
-                          ? "text-purple-600"
-                          : "text-cyan-600"
-                      }`}
+                      className="text-lg font-medium mb-6 text-blue-600"
                     >
                       {product.tagline}
                     </motion.p>
@@ -258,17 +242,7 @@ const ProductsPage = () => {
                           viewport={{ once: true }}
                           className="flex items-center gap-3 p-3 bg-white/60 backdrop-blur-sm rounded-xl border border-white/20 shadow-sm"
                         >
-                          <FaCheckCircle
-                            className={`w-4 h-4 ${
-                              index % 4 === 0
-                                ? "text-blue-500"
-                                : index % 4 === 1
-                                ? "text-green-500"
-                                : index % 4 === 2
-                                ? "text-purple-500"
-                                : "text-cyan-500"
-                            }`}
-                          />
+                          <FaCheckCircle className="w-4 h-4 text-blue-500" />
                           <span className="text-slate-700 font-medium">
                             {feature}
                           </span>
@@ -288,15 +262,7 @@ const ProductsPage = () => {
                     <motion.button
                       whileHover={{ scale: 1.05, y: -2 }}
                       whileTap={{ scale: 0.95 }}
-                      className={`flex items-center justify-center gap-2 px-8 py-4 rounded-2xl font-semibold text-white shadow-lg transition-all duration-300 ${
-                        index % 4 === 0
-                          ? "bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800"
-                          : index % 4 === 1
-                          ? "bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800"
-                          : index % 4 === 2
-                          ? "bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800"
-                          : "bg-gradient-to-r from-cyan-600 to-cyan-700 hover:from-cyan-700 hover:to-cyan-800"
-                      }`}
+                      className="flex items-center justify-center gap-2 px-8 py-4 rounded-2xl font-semibold text-white shadow-lg transition-all duration-300 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800"
                     >
                       Learn More
                       <FaArrowRight className="w-4 h-4" />
