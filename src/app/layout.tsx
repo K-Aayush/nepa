@@ -52,7 +52,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <Head>
+  <Head>
         <title>{String(metadata.title)}</title>
         <meta name="description" content={metadata.description ?? undefined} />
         <meta
@@ -71,12 +71,61 @@ export default function RootLayout({
               : undefined
           }
         />
-        <meta
-          name="robots"
-          content={
-            typeof metadata.robots === "string" ? metadata.robots : undefined
-          }
-        />
+        {/* Robots meta tag (SEO) */}
+        <meta name="robots" content={typeof metadata.robots === "string" ? metadata.robots : undefined} />
+        {/* Canonical URL */}
+        <link rel="canonical" href="https://www.nepatronix.org/" />
+        {/* robots.txt reference */}
+        <link rel="robots" href="/robots.txt" />
+  {/* Favicon and device icons */}
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#2563eb" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+  {/* RSS/Atom feeds */}
+  <link rel="alternate" type="application/rss+xml" title="NepaTronix RSS Feed" href="/rss.xml" />
+  <link rel="alternate" type="application/atom+xml" title="NepaTronix Atom Feed" href="/atom.xml" />
+  {/* Alternate language links (example) */}
+  <link rel="alternate" href="https://www.nepatronix.org/" hrefLang="en" />
+  <link rel="alternate" href="https://www.nepatronix.org/np/" hrefLang="ne" />
+  {/* Social profile links (example) */}
+  <link rel="me" href="https://twitter.com/NepaTronix" />
+  <link rel="me" href="https://facebook.com/NepaTronix" />
+  <link rel="me" href="https://linkedin.com/company/nepatronix" />
+  <link rel="me" href="https://instagram.com/nepatronix" />
+  <link rel="me" href="mailto:info@nepatronix.org" />
+  {/* App deep links (example) */}
+  <link rel="apple-touch-startup-image" href="/apple-splash-1125-2436.jpg" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)" />
+  <link rel="apple-touch-startup-image" href="/apple-splash-828-1792.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)" />
+  {/* Web app manifest and browserconfig */}
+  <meta name="msapplication-config" content="/browserconfig.xml" />
+        {/* Twitter Card meta tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={metadata.openGraph?.title ? String(metadata.openGraph.title) : undefined} />
+        <meta name="twitter:description" content={metadata.openGraph?.description} />
+        <meta name="twitter:image" content={
+          Array.isArray(metadata.openGraph?.images)
+            ? typeof metadata.openGraph.images[0] === "string"
+              ? metadata.openGraph.images[0]
+              : (metadata.openGraph.images[0] as { url?: string })?.url
+            : typeof metadata.openGraph?.images === "string"
+            ? metadata.openGraph?.images
+            : (metadata.openGraph?.images as { url?: string })?.url
+        } />
+        <meta name="twitter:site" content="@NepaTronix" />
+        {/* Theme color for browser UI */}
+        <meta name="theme-color" content="#2563eb" />
+        {/* Additional SEO meta tags */}
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="copyright" content="NepaTronix Team" />
+        <meta name="application-name" content="NepaTronix" />
+        <meta name="msapplication-TileColor" content="#2563eb" />
+        <meta name="msapplication-TileImage" content="/mstile-144x144.png" />
         <meta
           property="og:title"
           content={
