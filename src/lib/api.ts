@@ -96,6 +96,34 @@ export const galleryAPI = {
   },
 };
 
+// Teams API functions
+export interface TeamMember {
+  _id: string;
+  title: string;
+  about: string;
+  portfolio?: string;
+  facebook?: string;
+  instagram?: string;
+  picture: string;
+  profession: string;
+  linkedin?: string;
+  resume?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export const teamsAPI = {
+  // Get all team members
+  getTeamMembers: async (): Promise<TeamMember[]> => {
+    return apiRequest<TeamMember[]>("/teams");
+  },
+
+  // Get single team member by ID
+  getTeamMemberById: async (id: string): Promise<TeamMember> => {
+    return apiRequest<TeamMember>(`/teams/${id}`);
+  },
+};
+
 // Utility function to get full image URL
 export const getImageUrl = (imagePath: string): string => {
   if (imagePath.startsWith("http")) {
@@ -105,8 +133,10 @@ export const getImageUrl = (imagePath: string): string => {
   // Handle different image path formats
   let cleanPath = imagePath;
 
-  // If the path doesn't start with a folder name, assume it's in the root uploads
-  if (!cleanPath.includes("/")) {
+  // Handle teams images specifically
+  if (cleanPath.startsWith("/teams/")) {
+    cleanPath = cleanPath.substring(1);
+  } else if (!cleanPath.includes("/")) {
     cleanPath = `gallery/${cleanPath}`;
   }
 
