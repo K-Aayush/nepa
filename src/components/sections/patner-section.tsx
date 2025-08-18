@@ -5,10 +5,10 @@ import { useState, useEffect } from "react";
 import { clientsAPI, Client, getImageUrl } from "@/lib/api";
 
 interface ContactSectionProps {
-  onVisitWebsite: () => void;
+  onNavigate: () => void;
 }
 
-export function PatnerSection({ onVisitWebsite }: ContactSectionProps) {
+export function PatnerSection({ onNavigate }: ContactSectionProps) {
   const [clients, setClients] = useState<Client[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -156,13 +156,12 @@ export function PatnerSection({ onVisitWebsite }: ContactSectionProps) {
           </h3>
           <p className="text-lg mb-6 text-gray-700">
             Ready to transform your business with innovative IoT and robotics
-            solutions? Visit{" "}
-            <strong className="text-cyan-600">www.nepatronix.org</strong> to get
-            started on your journey with us.
+            solutions? <strong className="text-cyan-600"> Contact us</strong> to
+            get started on your journey with us.
           </p>
 
           <motion.button
-            onClick={onVisitWebsite}
+            onClick={onNavigate}
             className="px-8 py-3 bg-gradient-to-r from-cyan-400 via-blue-500 to-blue-600 text-white text-lg font-bold rounded-full shadow-lg hover:shadow-2xl transition-all duration-400 relative overflow-hidden"
             whileHover={{
               y: -5,
@@ -177,7 +176,7 @@ export function PatnerSection({ onVisitWebsite }: ContactSectionProps) {
               whileHover={{ x: "100%" }}
               transition={{ duration: 0.6 }}
             />
-            Visit NepaTronix.org
+            Contact Us
           </motion.button>
         </motion.div>
       </div>

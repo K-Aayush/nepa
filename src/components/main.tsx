@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 import { AnimatedBackground } from "@/components/animated-background";
 import { CustomCursor } from "@/components/custom-cursor";
@@ -30,6 +31,7 @@ const sections = [
 export default function Main() {
   const [currentSection, setCurrentSection] = useState("welcome");
   const [isLoading, setIsLoading] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoading(false), 2000);
@@ -72,11 +74,9 @@ export default function Main() {
     return () => observer.disconnect();
   }, []);
 
-  const handleVisitWebsite = () => {
-    window.open("https://www.nepatronix.org", "_blank");
+  const handleNavigateToContact = () => {
+    router.push("/contact");
   };
-
-
 
   // Loading Screen
   if (isLoading) {
@@ -221,7 +221,7 @@ export default function Main() {
 
         {/* Contact Section */}
         <section id="patner" className="min-h-screen">
-          <PatnerSection onVisitWebsite={handleVisitWebsite} />
+          <PatnerSection onNavigate={handleNavigateToContact} />
         </section>
       </main>
     </div>
