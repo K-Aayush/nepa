@@ -148,3 +148,18 @@ export const getImageUrl = (imagePath: string): string => {
   const baseUrl = API_BASE_URL.replace("/api/v1", "");
   return `${baseUrl}/uploads/${cleanPath}`;
 };
+
+// Clients API functions
+export interface Client {
+  _id: string;
+  image: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export const clientsAPI = {
+  // Get all clients
+  getClients: async (): Promise<Client[]> => {
+    return apiRequest<Client[]>("/clients");
+  },
+};
