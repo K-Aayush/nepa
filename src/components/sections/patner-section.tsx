@@ -40,7 +40,7 @@ export function PatnerSection({ onVisitWebsite }: ContactSectionProps) {
           transition={{ duration: 1.2, ease: [0.4, 0, 0.2, 1] }}
           viewport={{ once: true }}
         >
-          OUR CLIENTS
+          OUR PARTNERS
         </motion.h2>
 
         <motion.p
@@ -152,7 +152,7 @@ export function PatnerSection({ onVisitWebsite }: ContactSectionProps) {
           viewport={{ once: true }}
         >
           <h3 className="text-2xl font-bold text-cyan-600 mb-4">
-            Become Our Client
+            Become Our Partner
           </h3>
           <p className="text-lg mb-6 text-gray-700">
             Ready to transform your business with innovative IoT and robotics
