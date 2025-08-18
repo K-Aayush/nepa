@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { clientsAPI, Client, getImageUrl } from "@/lib/api";
+import Link from "next/link";
 
 interface ContactSectionProps {
   onVisitWebsite: () => void;
@@ -156,9 +157,12 @@ export function PatnerSection({ onVisitWebsite }: ContactSectionProps) {
           </h3>
           <p className="text-lg mb-6 text-gray-700">
             Ready to transform your business with innovative IoT and robotics
-            solutions? Visit{" "}
-            <strong className="text-cyan-600">www.nepatronix.org</strong> to get
-            started on your journey with us.
+            solutions?{" "}
+            <strong className="text-cyan-600">
+              {" "}
+              <Link href={"/contact"}>Contact us</Link>
+            </strong>{" "}
+            to get started on your journey with us.
           </p>
 
           <motion.button
