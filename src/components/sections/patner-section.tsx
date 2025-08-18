@@ -1,48 +1,38 @@
 "use client";
 
 import { motion } from "framer-motion";
-
-const partners = [
-  {
-    name: "School A",
-    logo: "/partners/school-a.png",
-    description: "Empowering students with IoT and Robotics education.",
-  },
-  {
-    name: "Industry B",
-    logo: "/partners/industry-b.png",
-    description: "Innovative automation solutions for industrial growth.",
-  },
-  {
-    name: "Tech C",
-    logo: "/partners/tech-c.png",
-    description: "Collaborating on AI and ML research projects.",
-  },
-  {
-    name: "Academy D",
-    logo: "/partners/academy-d.png",
-    description: "Leading workshops and training for future innovators.",
-  },
-  {
-    name: "Startup E",
-    logo: "/partners/startup-e.png",
-    description: "Driving new ideas in IoT and smart devices.",
-  },
-  {
-    name: "School F",
-    logo: "/partners/school-f.png",
-    description: "Expanding STEAM education across Nepal.",
-  },
-];
+import { useState, useEffect } from "react";
+import { clientsAPI, Client, getImageUrl } from "@/lib/api";
 
 interface ContactSectionProps {
   onVisitWebsite: () => void;
 }
 
 export function PatnerSection({ onVisitWebsite }: ContactSectionProps) {
+  const [clients, setClients] = useState<Client[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetchClients();
+  }, []);
+
+  const fetchClients = async () => {
+    try {
+      setLoading(true);
+      const clientsData = await clientsAPI.getClients();
+      setClients(clientsData);
+    } catch (err) {
+      setError("Failed to fetch clients");
+      console.error("Error fetching clients:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <section className="min-h-screen py-8 md:py-16 flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-white to-gray-50 px-8">
-      <div className="max-w-5xl mx-auto text-center px-8 relative z-10">
+      <div className="max-w-6xl mx-auto text-center px-8 relative z-10">
         <motion.h2
           className="text-5xl md:text-6xl font-black mb-8 bg-gradient-to-r from-blue-700 via-cyan-500 to-purple-600 bg-clip-text text-transparent drop-shadow-lg"
           initial={{ opacity: 0, scale: 0.8, y: -40 }}
@@ -50,7 +40,7 @@ export function PatnerSection({ onVisitWebsite }: ContactSectionProps) {
           transition={{ duration: 1.2, ease: [0.4, 0, 0.2, 1] }}
           viewport={{ once: true }}
         >
-          OUR PARTNERS
+          OUR CLIENTS
         </motion.h2>
 
         <motion.p
@@ -60,48 +50,98 @@ export function PatnerSection({ onVisitWebsite }: ContactSectionProps) {
           transition={{ duration: 1, delay: 0.3 }}
           viewport={{ once: true }}
         >
-          We are proud to collaborate with leading schools, industries, and
-          organizations to drive innovation in IoT and robotics across Nepal.
+          We are proud to work with leading organizations and institutions that
+          trust us to deliver innovative IoT and robotics solutions.
         </motion.p>
 
-        {/* Animated horizontal scrolling partners list */}
-        <motion.div
-          className="w-full overflow-x-auto py-4 mb-12"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0.5 }}
-          viewport={{ once: true }}
-        >
-          <div className="flex gap-8 min-w-full animate-scroll-x">
-            {partners.map((partner, idx) => (
-              <motion.div
-                key={partner.name}
-                className="bg-white/90 backdrop-blur-lg px-8 py-6 rounded-2xl border border-blue-100 shadow-xl flex flex-col items-center min-w-[260px] max-w-[260px] mx-2"
-                initial={{ scale: 0.9, opacity: 0 }}
-                whileInView={{ scale: 1, opacity: 1 }}
-                whileHover={{
-                  scale: 1.07,
-                  boxShadow: "0 25px 60px rgba(59, 130, 246, 0.18)",
-                  borderColor: "#06b6d4",
-                }}
-                transition={{ duration: 0.6, delay: idx * 0.1 }}
-                viewport={{ once: true }}
-              >
-                <img
-                  src={partner.logo}
-                  alt={partner.name}
-                  className="h-16 w-16 mb-4 rounded-full shadow-md object-contain bg-white"
-                />
-                <h3 className="text-lg font-bold mb-2 text-gray-900">
-                  {partner.name}
-                </h3>
-                <p className="text-gray-600 text-sm text-center">
-                  {partner.description}
-                </p>
-              </motion.div>
-            ))}
+        {/* Clients Slider */}
+        {loading ? (
+          <div className="flex justify-center items-center py-16">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
           </div>
-        </motion.div>
+        ) : error ? (
+          <div className="text-center py-16">
+            <p className="text-red-600 mb-4">{error}</p>
+            <button
+              onClick={fetchClients}
+              className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+            >
+              Try Again
+            </button>
+          </div>
+        ) : clients.length === 0 ? (
+          <div className="text-center py-16">
+            <p className="text-gray-600 text-lg">No clients to display yet.</p>
+          </div>
+        ) : (
+          <motion.div
+            className="relative overflow-hidden py-8 mb-12"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 0.5 }}
+            viewport={{ once: true }}
+          >
+            {/* Infinite scrolling slider */}
+            <div className="flex animate-scroll-infinite">
+              {/* First set of clients */}
+              {clients.map((client, idx) => (
+                <motion.div
+                  key={`first-${client._id}`}
+                  className="flex-shrink-0 mx-6 bg-white/90 backdrop-blur-lg rounded-2xl border border-blue-100 shadow-xl hover:shadow-2xl transition-all duration-500 p-6 w-48 h-32 flex items-center justify-center group"
+                  initial={{ scale: 0.9, opacity: 0 }}
+                  whileInView={{ scale: 1, opacity: 1 }}
+                  whileHover={{
+                    scale: 1.05,
+                    y: -5,
+                    boxShadow: "0 25px 60px rgba(59, 130, 246, 0.18)",
+                    borderColor: "#06b6d4",
+                  }}
+                  transition={{ duration: 0.6, delay: idx * 0.1 }}
+                  viewport={{ once: true }}
+                >
+                  <img
+                    src={getImageUrl(client.image)}
+                    alt={`Client ${idx + 1}`}
+                    className="max-w-full max-h-full object-contain filter grayscale group-hover:grayscale-0 transition-all duration-500"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.src = "/logo.png";
+                    }}
+                  />
+                </motion.div>
+              ))}
+
+              {/* Duplicate set for seamless loop */}
+              {clients.map((client, idx) => (
+                <motion.div
+                  key={`second-${client._id}`}
+                  className="flex-shrink-0 mx-6 bg-white/90 backdrop-blur-lg rounded-2xl border border-blue-100 shadow-xl hover:shadow-2xl transition-all duration-500 p-6 w-48 h-32 flex items-center justify-center group"
+                  whileHover={{
+                    scale: 1.05,
+                    y: -5,
+                    boxShadow: "0 25px 60px rgba(59, 130, 246, 0.18)",
+                    borderColor: "#06b6d4",
+                  }}
+                  transition={{ duration: 0.6 }}
+                >
+                  <img
+                    src={getImageUrl(client.image)}
+                    alt={`Client ${idx + 1}`}
+                    className="max-w-full max-h-full object-contain filter grayscale group-hover:grayscale-0 transition-all duration-500"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.src = "/logo.png";
+                    }}
+                  />
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Gradient overlays for smooth edges */}
+            <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-white to-transparent pointer-events-none z-10"></div>
+            <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-white to-transparent pointer-events-none z-10"></div>
+          </motion.div>
+        )}
 
         {/* Get In Touch Section */}
         <motion.div
@@ -112,12 +152,13 @@ export function PatnerSection({ onVisitWebsite }: ContactSectionProps) {
           viewport={{ once: true }}
         >
           <h3 className="text-2xl font-bold text-cyan-600 mb-4">
-            Become a Partner
+            Become Our Client
           </h3>
           <p className="text-lg mb-6 text-gray-700">
-            Interested in joining our partner network? Visit{" "}
-            <strong className="text-cyan-600">www.nepatronix.org</strong> to
-            connect and collaborate on future projects.
+            Ready to transform your business with innovative IoT and robotics
+            solutions? Visit{" "}
+            <strong className="text-cyan-600">www.nepatronix.org</strong> to get
+            started on your journey with us.
           </p>
 
           <motion.button
@@ -155,18 +196,26 @@ export function PatnerSection({ onVisitWebsite }: ContactSectionProps) {
         }}
       />
 
-      {/* Add scrolling animation keyframes */}
-      <style>
-        {`
-          @keyframes scroll-x {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
+      {/* Enhanced CSS for infinite scroll animation */}
+      <style jsx>{`
+        @keyframes scroll-infinite {
+          0% {
+            transform: translateX(0);
           }
-          .animate-scroll-x {
-            animation: scroll-x 30s linear infinite;
+          100% {
+            transform: translateX(-50%);
           }
-        `}
-      </style>
+        }
+
+        .animate-scroll-infinite {
+          animation: scroll-infinite 30s linear infinite;
+          width: calc(200% + 48px); /* Account for margins */
+        }
+
+        .animate-scroll-infinite:hover {
+          animation-play-state: paused;
+        }
+      `}</style>
     </section>
   );
 }
