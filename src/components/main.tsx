@@ -154,47 +154,6 @@ export default function Main() {
 
       {/* Main Content */}
       <main className="relative z-5">
-        {/* Welcome Section */}
-        <section
-          id="welcome"
-          className="min-h-screen flex items-center justify-center bg-white relative overflow-hidden"
-        >
-          <div className="text-center text-gray-800 z-10 relative">
-            <motion.h1
-              className="text-6xl md:text-8xl font-black mb-6 bg-gradient-to-r from-gray-800 via-cyan-400 to-gray-800 bg-clip-text text-transparent"
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.2 }}
-            >
-              NepaTronix
-            </motion.h1>
-            <motion.p
-              className="text-2xl md:text-3xl mb-8 text-cyan-600 font-bold"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.3 }}
-            >
-              Where Creativity Meets Innovation
-            </motion.p>
-            <motion.p
-              className="text-lg md:text-xl mb-12 text-gray-600 max-w-3xl mx-auto"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.5 }}
-            >
-              Welcome to Nepal&apos;s leading IoT and Robotics company. Click
-              the robot guide to explore our innovative solutions!
-            </motion.p>
-            <motion.div
-              className="text-cyan-600 text-lg font-semibold"
-              animate={{ opacity: [0.5, 1, 0.5] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            >
-              👆 Click the robot to start exploring!
-            </motion.div>
-          </div>
-        </section>
-
         {/* Home Section */}
         <section id="home" className="min-h-screen">
           <HomeSection onNavigate={navigateToSection} />
