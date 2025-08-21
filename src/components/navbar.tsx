@@ -35,9 +35,9 @@ export function Navbar({ activeSection }: NavbarProps) {
         {/* Desktop View (lg and above) */}
         <div className="hidden lg:flex items-center bg-white rounded-full shadow-md px-4 py-1.5 gap-0">
           {/* Logo */}
-          <div className="flex items-center justify-center bg-white rounded-full shadow-sm mr-6 p-2 border border-gray-200">
+          <Link href="/" className="flex items-center justify-center bg-white rounded-full shadow-sm mr-6 p-2 border border-gray-200">
             <img src="/logo.png" alt="Logo" className="h-8 w-35" />
-          </div>
+          </Link>
           {navItems.map((item) => (
             <Link
               key={item.id}
@@ -60,9 +60,9 @@ export function Navbar({ activeSection }: NavbarProps) {
         {/* Tablet View (md to lg) */}
         <div className="hidden md:flex lg:hidden items-center bg-white rounded-full shadow-md px-3 py-1.5 gap-0">
           {/* Logo */}
-          <div className="flex items-center justify-center bg-white rounded-full shadow-sm mr-4 p-1.5 border border-gray-200">
+          <Link href="/" className="flex items-center justify-center bg-white rounded-full shadow-sm mr-4 p-1.5 border border-gray-200">
             <img src="/logo.png" alt="Logo" className="h-6 w-28" />
-          </div>
+          </Link>
           {navItems.slice(0, 6).map((item) => (
             <Link
               key={item.id}
@@ -104,9 +104,9 @@ export function Navbar({ activeSection }: NavbarProps) {
         {/* Mobile View */}
         <div className="flex md:hidden items-center justify-between w-full bg-white rounded-full shadow-md px-4 py-2">
           {/* Logo */}
-          <div className="flex items-center justify-center bg-white rounded-full shadow-sm p-1.5 border border-gray-200">
-            
-          </div>
+          <Link href="/" className="flex items-center justify-center bg-white rounded-full shadow-sm p-1.5 border border-gray-200">
+            <img src="/logo.png" alt="Logo" className="h-6 w-28" />
+          </Link>
           
           {/* Hamburger Menu Button */}
           <button

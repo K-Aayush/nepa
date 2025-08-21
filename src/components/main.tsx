@@ -14,7 +14,7 @@ import { ProjectsSection } from "@/components/sections/projects-section";
 import { PatnerSection } from "@/components/sections/patner-section";
 import { ProductsSection } from "./sections/products-section";
 import { ProgressIndicator } from "./progress-indicator";
-import { RobotGuide } from "./robot-guide";
+
 
 const sections = [
   "welcome",
@@ -29,18 +29,21 @@ const sections = [
 ];
 
 export default function Main() {
+
   const [currentSection, setCurrentSection] = useState("welcome");
-  const [isLoading, setIsLoading] = useState(true);
-  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
+  const [mounted, setMounted] = useState(false);
+    // const router = useRouter();
 
   useEffect(() => {
+    setMounted(true);
+    setIsLoading(true);
     const timer = setTimeout(() => setIsLoading(false), 2000);
     return () => clearTimeout(timer);
   }, []);
 
   const navigateToSection = (section: string) => {
     if (section === currentSection) return;
-
     setCurrentSection(section);
     const element = document.getElementById(section);
     if (element) {
@@ -48,38 +51,8 @@ export default function Main() {
     }
   };
 
-  // Intersection Observer for section detection
-  useEffect(() => {
-    const observerOptions = {
-      threshold: 0.3,
-      rootMargin: "0px 0px -100px 0px",
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const sectionId = entry.target.id;
-          if (sections.includes(sectionId)) {
-            setCurrentSection(sectionId);
-          }
-        }
-      });
-    }, observerOptions);
-
-    sections.forEach((sectionId) => {
-      const element = document.getElementById(sectionId);
-      if (element) observer.observe(element);
-    });
-
-    return () => observer.disconnect();
-  }, []);
-
-  const handleNavigateToContact = () => {
-    router.push("/contact");
-  };
-
-  // Loading Screen
-  if (isLoading) {
+  // Loading Screen (only after mount to avoid hydration mismatch)
+  if (mounted && isLoading) {
     return (
       <div className="min-h-screen bg-white flex items-center justify-center">
         <motion.div
@@ -142,12 +115,7 @@ export default function Main() {
         onNavigate={navigateToSection}
       />
 
-      {/* Robot Guide */}
-      <RobotGuide
-        currentSection={currentSection}
-        onNavigate={navigateToSection}
-        isVisible={true}
-      />
+
 
       {/* Chatbot */}
       <Chatbot />
@@ -180,7 +148,7 @@ export default function Main() {
 
         {/* Contact Section */}
         <section id="patner" className="min-h-screen">
-          <PatnerSection onNavigate={handleNavigateToContact} />
+          <PatnerSection onNavigate={() => {}} />
         </section>
       </main>
     </div>

@@ -136,62 +136,62 @@ const CollaborationPage = () => (
       <h2 className="text-2xl font-bold mb-6 text-blue-600 text-center">
         Past Collaborations
       </h2>
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 items-center mb-8">
-        {PARTNER_LOGOS.map((logo, i) => (
-          <motion.div
-            key={logo.name}
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.5, delay: i * 0.07, ease: "easeOut" }}
-            className="flex flex-col items-center bg-white/70 rounded-xl shadow p-4 hover:shadow-lg transition-all border border-blue-100/30"
-          >
-            <div className="relative w-20 h-20 mb-2">
-              <Image
-                src={logo.img}
-                alt={logo.name}
-                fill
-                style={{ objectFit: "contain" }}
-              />
+      {/* First sliding row of logos (left to right) */}
+      <div className="overflow-x-hidden mb-4">
+        <div
+          className="flex items-center gap-12 whitespace-nowrap py-4"
+          style={{ animation: 'marqueeLTR 18s linear infinite' }}
+        >
+          {PARTNER_LOGOS.concat(PARTNER_LOGOS).map((logo, i) => (
+            <div key={logo.name + 'ltr' + i} className="flex flex-col items-center min-w-[120px]">
+              <div className="relative w-20 h-20 mb-2">
+                <Image
+                  src={logo.img}
+                  alt={logo.name}
+                  fill
+                  style={{ objectFit: "contain" }}
+                />
+              </div>
+              <span className="text-xs text-gray-600 font-medium mt-1">
+                {logo.name}
+              </span>
             </div>
-            <span className="text-xs text-gray-600 font-medium mt-1">
-              {logo.name}
-            </span>
-          </motion.div>
-        ))}
+          ))}
+        </div>
       </div>
-      <div className="grid md:grid-cols-2 gap-8">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
-          className="bg-blue-50/80 rounded-2xl p-6 shadow border border-blue-100/30"
+      {/* Second sliding row of logos (right to left, different speed) */}
+      <div className="overflow-x-hidden mb-10">
+        <div
+          className="flex items-center gap-12 whitespace-nowrap py-4"
+          style={{ animation: 'marqueeRTL 24s linear infinite' }}
         >
-          <h4 className="font-semibold mb-1 text-blue-700">
-            National Infotech College
-          </h4>
-          <p className="text-sm text-gray-700">
-            Organized IoT bootcamp for 100+ students, resulting in 10+
-            student-led projects and ongoing mentorship.
-          </p>
-        </motion.div>
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
-          className="bg-blue-50/80 rounded-2xl p-6 shadow border border-blue-100/30"
-        >
-          <h4 className="font-semibold mb-1 text-blue-700">
-            Subhakamana School
-          </h4>
-          <p className="text-sm text-gray-700">
-            Robotics exhibition and hands-on workshops, sparking STEM interest
-            among school children.
-          </p>
-        </motion.div>
+          {PARTNER_LOGOS.concat(PARTNER_LOGOS).map((logo, i) => (
+            <div key={logo.name + 'rtl' + i} className="flex flex-col items-center min-w-[120px]">
+              <div className="relative w-16 h-16 mb-1">
+                <Image
+                  src={logo.img}
+                  alt={logo.name}
+                  fill
+                  style={{ objectFit: "contain" }}
+                />
+              </div>
+              <span className="text-xs text-gray-500 font-medium text-center">
+                {logo.name}
+              </span>
+            </div>
+          ))}
+        </div>
       </div>
+      <style jsx>{`
+        @keyframes marqueeLTR {
+          0% { transform: translateX(-50%); }
+          100% { transform: translateX(0); }
+        }
+        @keyframes marqueeRTL {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+      `}</style>
     </section>
 
     {/* Why Collaborate With Us */}
@@ -305,38 +305,6 @@ const CollaborationPage = () => (
       </div>
     </section>
 
-    {/* Contact Info / Footer */}
-    <footer className="w-full bg-gradient-to-r from-blue-100/60 to-purple-100/60 py-10 mt-12 border-t border-blue-200/30">
-      <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8 px-4">
-        <div className="flex flex-col gap-3">
-          <div className="flex items-center gap-2">
-            <FaEnvelope className="text-blue-600" />
-            <a href="mailto:contact@nepatronix.org" className="hover:underline">
-              contact@nepatronix.org
-            </a>
-          </div>
-          <div className="flex items-center gap-2">
-            <FaPhone className="text-blue-600" />
-            <span>+977 9803661701</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <FaMapMarkerAlt className="text-blue-600" />
-            <span>Kupondol, Lalitpur</span>
-          </div>
-        </div>
-        <div className="flex gap-5 text-2xl">
-          <a href="#" className="text-blue-700 hover:text-blue-900">
-            <FaFacebook />
-          </a>
-          <a href="#" className="text-red-600 hover:text-red-800">
-            <FaYoutube />
-          </a>
-          <a href="#" className="text-blue-500 hover:text-blue-700">
-            <FaLinkedin />
-          </a>
-        </div>
-      </div>
-    </footer>
   </div>
 );
 
