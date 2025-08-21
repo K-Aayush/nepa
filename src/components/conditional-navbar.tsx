@@ -14,5 +14,22 @@ export function ConditionalNavbar() {
     return null;
   }
 
-  return <Navbar activeSection={""} />;
+  // Determine active section from pathname
+  const section = (() => {
+    if (pathname === "/" || pathname === "") return "";
+    const match = pathname.split("/")[1];
+    switch (match) {
+      case "collaboration":
+      case "services":
+      case "products":
+      case "teams":
+      case "blogs":
+      case "gallery":
+      case "contact":
+        return match;
+      default:
+        return "";
+    }
+  })();
+  return <Navbar activeSection={section} />;
 }
