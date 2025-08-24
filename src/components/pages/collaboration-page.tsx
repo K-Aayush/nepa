@@ -148,10 +148,10 @@ const CollaborationPage = () => {
           Past Collaborations
         </h2>
 
+        {/* Clients Slider */}
         {loading ? (
           <div className="flex justify-center items-center py-16">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-            <span className="ml-3 text-gray-600">Loading our partners...</span>
           </div>
         ) : error ? (
           <div className="text-center py-16">
@@ -165,93 +165,77 @@ const CollaborationPage = () => {
           </div>
         ) : clients.length === 0 ? (
           <div className="text-center py-16">
-            <p className="text-gray-600 text-lg">
-              No collaboration partners to display yet.
-            </p>
+            <p className="text-gray-600 text-lg">No clients to display yet.</p>
           </div>
         ) : (
-          <>
-            {/* First sliding row of logos (left to right) */}
-            <div className="overflow-x-hidden mb-4">
-              <div
-                className="flex items-center gap-12 whitespace-nowrap py-4"
-                style={{ animation: "marqueeLTR 18s linear infinite" }}
-              >
-                {clients.concat(clients).map((client, i) => (
-                  <div
-                    key={client._id + "ltr" + i}
-                    className="flex flex-col items-center min-w-[120px]"
-                  >
-                    <div className="relative w-20 h-20 mb-2 bg-white rounded-lg shadow-md p-2 hover:shadow-lg transition-shadow">
-                      <Image
-                        src={getImageUrl(client.image)}
-                        alt={`Partner ${i + 1}`}
-                        fill
-                        style={{ objectFit: "contain" }}
-                        onError={(e) => {
-                          const target = e.target as HTMLImageElement;
-                          target.src = "/logo.png";
-                        }}
-                      />
-                    </div>
-                    <span className="text-xs text-gray-600 font-medium mt-1 text-center">
-                      Partner {(i % clients.length) + 1}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
-            {/* Second sliding row of logos (right to left, different speed) */}
-            <div className="overflow-x-hidden mb-10">
-              <div
-                className="flex items-center gap-12 whitespace-nowrap py-4"
-                style={{ animation: "marqueeRTL 24s linear infinite" }}
-              >
-                {clients.concat(clients).map((client, i) => (
-                  <div
-                    key={client._id + "rtl" + i}
-                    className="flex flex-col items-center min-w-[120px]"
-                  >
-                    <div className="relative w-16 h-16 mb-1 bg-white rounded-lg shadow-md p-2 hover:shadow-lg transition-shadow">
-                      <Image
-                        src={getImageUrl(client.image)}
-                        alt={`Partner ${i + 1}`}
-                        fill
-                        style={{ objectFit: "contain" }}
-                        onError={(e) => {
-                          const target = e.target as HTMLImageElement;
-                          target.src = "/logo.png";
-                        }}
-                      />
-                    </div>
-                    <span className="text-xs text-gray-500 font-medium text-center">
-                      Partner {(i % clients.length) + 1}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </>
-        )}
+          <motion.div
+            className="relative overflow-hidden py-8 mb-12"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 0.5 }}
+            viewport={{ once: true }}
+          >
+            {/* Infinite scrolling slider */}
+            <div className="flex animate-scroll-infinite">
+              {/* First set of clients */}
+              {clients.map((client, idx) => (
+                <motion.div
+                  key={`first-${client._id}`}
+                  className="flex-shrink-0 mx-6 bg-white/90 backdrop-blur-lg rounded-2xl border border-blue-100 shadow-xl hover:shadow-2xl transition-all duration-500 p-6 w-48 h-32 flex items-center justify-center group"
+                  initial={{ scale: 0.9, opacity: 0 }}
+                  whileInView={{ scale: 1, opacity: 1 }}
+                  whileHover={{
+                    scale: 1.05,
+                    y: -5,
+                    boxShadow: "0 25px 60px rgba(59, 130, 246, 0.18)",
+                    borderColor: "#06b6d4",
+                  }}
+                  transition={{ duration: 0.6, delay: idx * 0.1 }}
+                  viewport={{ once: true }}
+                >
+                  <img
+                    src={getImageUrl(client.image)}
+                    alt={`Client ${idx + 1}`}
+                    className="max-w-full max-h-full object-contain filter grayscale group-hover:grayscale-0 transition-all duration-500"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.src = "/logo.png";
+                    }}
+                  />
+                </motion.div>
+              ))}
 
-        <style jsx>{`
-          @keyframes marqueeLTR {
-            0% {
-              transform: translateX(-50%);
-            }
-            100% {
-              transform: translateX(0);
-            }
-          }
-          @keyframes marqueeRTL {
-            0% {
-              transform: translateX(0);
-            }
-            100% {
-              transform: translateX(-50%);
-            }
-          }
-        `}</style>
+              {/* Duplicate set for seamless loop */}
+              {clients.map((client, idx) => (
+                <motion.div
+                  key={`second-${client._id}`}
+                  className="flex-shrink-0 mx-6 bg-white/90 backdrop-blur-lg rounded-2xl border border-blue-100 shadow-xl hover:shadow-2xl transition-all duration-500 p-6 w-48 h-32 flex items-center justify-center group"
+                  whileHover={{
+                    scale: 1.05,
+                    y: -5,
+                    boxShadow: "0 25px 60px rgba(59, 130, 246, 0.18)",
+                    borderColor: "#06b6d4",
+                  }}
+                  transition={{ duration: 0.6 }}
+                >
+                  <img
+                    src={getImageUrl(client.image)}
+                    alt={`Client ${idx + 1}`}
+                    className="max-w-full max-h-full object-contain filter grayscale group-hover:grayscale-0 transition-all duration-500"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.src = "/logo.png";
+                    }}
+                  />
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Gradient overlays for smooth edges */}
+            <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-white to-transparent pointer-events-none z-10"></div>
+            <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-white to-transparent pointer-events-none z-10"></div>
+          </motion.div>
+        )}
       </section>
 
       {/* Enhanced Partner Showcase */}
