@@ -231,51 +231,31 @@ const CollaborationPage = () => {
               ))}
             </div>
 
-            {/* Gradient overlays for smooth edges */}
             <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-white to-transparent pointer-events-none z-10"></div>
             <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-white to-transparent pointer-events-none z-10"></div>
           </motion.div>
         )}
-      </section>
 
-      {/* Enhanced Partner Showcase */}
-      {!loading && !error && clients.length > 0 && (
-        <section className="max-w-4xl mx-auto py-12 px-4">
-          <h3 className="text-xl font-bold mb-6 text-blue-600 text-center">
-            Trusted by Leading Organizations
-          </h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {clients.slice(0, 8).map((client, index) => (
-              <motion.div
-                key={client._id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-white rounded-xl shadow-lg p-4 hover:shadow-xl transition-all duration-300 border border-blue-100/30 group"
-                whileHover={{ scale: 1.05, y: -5 }}
-              >
-                <div className="relative w-full h-16 mb-2">
-                  <Image
-                    src={getImageUrl(client.image)}
-                    alt={`Partner ${index + 1}`}
-                    fill
-                    style={{ objectFit: "contain" }}
-                    className="filter grayscale group-hover:grayscale-0 transition-all duration-300"
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.src = "/logo.png";
-                    }}
-                  />
-                </div>
-                <span className="text-xs text-gray-600 font-medium text-center block">
-                  Partner {index + 1}
-                </span>
-              </motion.div>
-            ))}
-          </div>
-        </section>
-      )}
+        <style jsx>{`
+          @keyframes scroll-infinite {
+            0% {
+              transform: translateX(0);
+            }
+            100% {
+              transform: translateX(-50%);
+            }
+          }
+
+          .animate-scroll-infinite {
+            animation: scroll-infinite 30s linear infinite;
+            width: calc(200% + 48px); /* Account for margins */
+          }
+
+          .animate-scroll-infinite:hover {
+            animation-play-state: paused;
+          }
+        `}</style>
+      </section>
 
       {/* Why Collaborate With Us */}
       <section className="max-w-4xl mx-auto py-12 px-4">
